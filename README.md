@@ -1,8 +1,8 @@
-# CellMaskNet
+# CellNura
  A Nucleus Representation Aware Deep  Learning Model for Cell Segmentation and Classification  in Histopathological Images
 ## Introduction
 
-**CellMaskNet** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
+**CellNura** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
 *   **Local Features**: Extracted via MobileViT.
 *   **Global Features**: Extracted via Swin Transformer.
 *   **Co-Attention Mechanism**: To effectively fuse local and global visual features.
@@ -12,7 +12,7 @@
 
   <img width="600" height="800" alt="model" src="https://github.com/user-attachments/assets/8326ca63-2864-434c-ad59-d4eb6d2bf746" />
 
-(a) Preprocessing Module. Raw histopathology images are first processed by a nuclear segmentation network to delineate nuclear boundaries and extract individual nucleus instances, yielding high-quality nuclear masks and cropped patches that serve as the input for downstream analysis. (b) Classification Module. For each segmented nucleus, CellMaskNet constructs a multi-source representation by combining four complementary groups of features: Context-aware Appearance Features (CAF) obtained via cross-scale co-attention between tile-level and nucleus-level representations, Morphological Structure Features (MSF) derived from contour-based morphometric descriptors, Chromatin Distribution Features (CDF) capturing intra-nuclear and perinuclear chromatin distribution through multi-scale annular sampling, and Microenvironment Graph Features (MGF) modeling local tissue topology using a GAT. These features are concatenated and fed into a multilayer perceptron classifier, which is trained with a cross-entropy loss to achieve accurate and robust nuclear cell type classification.
+(a) Preprocessing Module. Raw histopathology images are first processed by a nuclear segmentation network to delineate nuclear boundaries and extract individual nucleus instances, yielding high-quality nuclear masks and cropped patches that serve as the input for downstream analysis. (b) Classification Module. For each segmented nucleus, CellNura constructs a multi-source representation by combining four complementary groups of features: Context-aware Appearance Features (CAF) obtained via cross-scale co-attention between tile-level and nucleus-level representations, Morphological Structure Features (MSF) derived from contour-based morphometric descriptors, Chromatin Distribution Features (CDF) capturing intra-nuclear and perinuclear chromatin distribution through multi-scale annular sampling, and Microenvironment Graph Features (MGF) modeling local tissue topology using a GAT. These features are concatenated and fed into a multilayer perceptron classifier, which is trained with a cross-entropy loss to achieve accurate and robust nuclear cell type classification.
 
 ## Pipeline Overview
 
@@ -45,8 +45,8 @@ The project is structured into sequential steps:
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/CellMaskNet.git
-    cd CellMaskNet
+    git clone https://github.com/yourusername/CellNura.git
+    cd CellNura
     ```
 
 2.  Install dependencies:
