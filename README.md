@@ -29,17 +29,17 @@ The project is structured into sequential steps:
     *   Uses MobileViT to extract local visual features from nucleus crops.
 5.  **Step 4: Global Feature Extraction** (`step4_batch_swin.py`)
     *   Uses Swin Transformer to extract global context features from whole slide images (or large patches).
-6.  **Step 5: Feature Fusion** (`step5_batch_coattention.py`)
+6.  **Step 5: Feature Fusion** (`step5_batch_cross_attention.py`)
     *   Applies a Cross-Attention mechanism to fuse MobileViT and Swin features.
-7.  **Step 6: Morphological Features** (`step6_batch_morphological.py`)
+8.  **Step 6: Morphological Features** (`step6_batch_morphological.py`)
     *   Calculates geometric features (area, perimeter, eccentricity, etc.).
-8.  **Step 7: Graph Features** (`step7_gat_integrated.py`)
+9.  **Step 7: Graph Features** (`step7_gat_integrated.py`)
     *   Constructs a cell graph and extracts features using GAT.
-9.  **Step 8: Ring Features** (`step8_batch_ring.py`)
+10.  **Step 8: Ring Features** (`step8_batch_ring.py`)
     *   Extracts intensity patterns around the nuclear boundary.
-10. **Step 9: Centroid Matching** (`step9_train_centroid_matcher.py`)
+11. **Step 9: Centroid Matching** (`step9_train_centroid_matcher.py`)
     *   Matches predicted centroids with ground truth centroids to assign labels.
-11. **Training** (`train_nucleus_classifier_true.py`)
+12. **Training** (`train_nucleus_classifier_true.py`)
     *   Trains the final MLP classifier using the fused feature set.
 
 ## Installation
