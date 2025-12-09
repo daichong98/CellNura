@@ -1,18 +1,19 @@
 # CellNura
- A Nucleus Representation Aware Deep  Learning Model for Cell Segmentation and Classification  in Histopathological Images
+ A Nucleus Representation-Aware Deep  Learning Model for Cell Classification  in Histopathological Images
 ## Introduction
 
 **CellNura** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
 *   **Local Features**: Extracted via MobileViT.
 *   **Global Features**: Extracted via Swin Transformer.
-*   **Co-Attention Mechanism**: To effectively fuse local and global visual features.
+*   **Cross-Attention Mechanism**: To effectively fuse local and global visual features.
 *   **Morphological Features**: Geometric properties of the nuclei.
 *   **Ring Features**: Texture information from the nuclear boundary.
 *   **Graph Features**: Spatial relationships captured by Graph Attention Networks (GAT).
+*   
+<img width="2228" height="2587" alt="model" src="https://github.com/user-attachments/assets/139274b7-b93e-4675-94c2-b27fc1772206" />
 
-  <img width="600" height="800" alt="model" src="https://github.com/user-attachments/assets/8326ca63-2864-434c-ad59-d4eb6d2bf746" />
 
-(a) Preprocessing Module. Raw histopathology images are first processed by a nuclear segmentation network to delineate nuclear boundaries and extract individual nucleus instances, yielding high-quality nuclear masks and cropped patches that serve as the input for downstream analysis. (b) Classification Module. For each segmented nucleus, CellNura constructs a multi-source representation by combining four complementary groups of features: Context-aware Appearance Features (CAF) obtained via cross-scale co-attention between tile-level and nucleus-level representations, Morphological Structure Features (MSF) derived from contour-based morphometric descriptors, Chromatin Distribution Features (CDF) capturing intra-nuclear and perinuclear chromatin distribution through multi-scale annular sampling, and Microenvironment Graph Features (MGF) modeling local tissue topology using a GAT. These features are concatenated and fed into a multilayer perceptron classifier, which is trained with a cross-entropy loss to achieve accurate and robust nuclear cell type classification.
+(a) Preprocessing Module. Raw histopathology images are first processed by a nuclear segmentation network to delineate nuclear boundaries and extract individual nucleus instances, yielding high-quality nuclear masks and cropped patches that serve as the input for downstream analysis. (b) Classification Module. For each segmented nucleus, CellNura constructs a multi-source representation by combining four complementary groups of features: Context-aware Appearance Features (CAF) obtained via cross-scale cross-attention between tile-level and nucleus-level representations, Morphological Structure Features (MSF) derived from contour-based morphometric descriptors, Chromatin Distribution Features (CDF) capturing intra-nuclear and perinuclear chromatin distribution through multi-scale annular sampling, and Microenvironment Graph Features (MGF) modeling local tissue topology using a GAT. These features are concatenated and fed into a multilayer perceptron classifier, which is trained with a cross-entropy loss to achieve accurate and robust nuclear cell type classification.
 
 ## Pipeline Overview
 
@@ -29,7 +30,7 @@ The project is structured into sequential steps:
 5.  **Step 4: Global Feature Extraction** (`step4_batch_swin.py`)
     *   Uses Swin Transformer to extract global context features from whole slide images (or large patches).
 6.  **Step 5: Feature Fusion** (`step5_batch_coattention.py`)
-    *   Applies a Co-Attention mechanism to fuse MobileViT and Swin features.
+    *   Applies a Cross-Attention mechanism to fuse MobileViT and Swin features.
 7.  **Step 6: Morphological Features** (`step6_batch_morphological.py`)
     *   Calculates geometric features (area, perimeter, eccentricity, etc.).
 8.  **Step 7: Graph Features** (`step7_gat_integrated.py`)
