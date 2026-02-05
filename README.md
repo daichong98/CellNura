@@ -10,7 +10,8 @@
 *   **Ring Features**: Texture information from the nuclear boundary.
 *   **Graph Features**: Spatial relationships captured by Graph Attention Networks (GAT).
 *   
-<img width="2228" height="2587" alt="model" src="https://github.com/user-attachments/assets/139274b7-b93e-4675-94c2-b27fc1772206" />
+[model.tif](https://github.com/user-attachments/files/25095424/model.tif)
+
 
 
 (a) Preprocessing Module. Raw histopathology images are first processed by a nuclear segmentation network to delineate nuclear boundaries and extract individual nucleus instances, yielding high-quality nuclear masks and cropped patches that serve as the input for downstream analysis. (b) Classification Module. For each segmented nucleus, CellNura constructs a multi-source representation by combining four complementary groups of features: Context-aware Appearance Features (CAF) obtained via cross-scale cross-attention between tile-level and nucleus-level representations, Morphological Structure Features (MSF) derived from contour-based morphometric descriptors, Chromatin Distribution Features (CDF) capturing intra-nuclear and perinuclear chromatin distribution through multi-scale annular sampling, and Microenvironment Graph Features (MGF) modeling local tissue topology using a GAT. These features are concatenated and fed into a multilayer perceptron classifier, which is trained with a cross-entropy loss to achieve accurate and robust nuclear cell type classification.
