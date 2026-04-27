@@ -12,32 +12,6 @@
 <img width="6129" height="2889" alt="model" src="https://github.com/user-attachments/assets/7233f6dc-ba84-42a3-962f-bb7f939748d6" />
 The workflow of the CellNura framework. The pipeline begins with (a) instance segmentation to isolate single nuclei and their masks. (b) The Multi-View Feature Extraction module then integrates four distinct feature streams: deep visual representations (combining Swin and Vision Transformers via cross-attention), morphological descriptors, chromatin distribution profiles derived from annular sampling, and microenvironmental topology features modeled by a Graph Attention Network. (c) Finally, these multi-dimensional features are fused and fed into an MLP classifier to achieve fine-grained nuclear classification..
 
-## Pipeline Overview
-
-The project is structured into sequential steps:
-
-1.  **Step 0: Data Preprocessing** (`step0_data_preprocessor.py`)
-    *   Prepares the dataset for processing.
-2.  **Step 1: Segmentation** (`step1_hovernet_batch.py`)
-    *   Runs HoverNet to generate instance segmentation masks for all images.
-3.  **Step 2: Nuclei Extraction** (`step2_extract_nuclei.py`)
-    *   Crops individual nucleus images based on segmentation masks.
-4.  **Step 3: Local Feature Extraction** (`step3_batch_mobilevit.py`)
-    *   Uses MobileViT to extract local visual features from nucleus crops.
-5.  **Step 4: Global Feature Extraction** (`step4_batch_swin.py`)
-    *   Uses Swin Transformer to extract global context features from whole slide images (or large patches).
-6.  **Step 5: Feature Fusion** (`step5_batch_cross_attention.py`)
-    *   Applies a Cross-Attention mechanism to fuse MobileViT and Swin features.
-8.  **Step 6: Morphological Features** (`step6_batch_morphological.py`)
-    *   Calculates geometric features (area, perimeter, eccentricity, etc.).
-9.  **Step 7: Graph Features** (`step7_gat_integrated.py`)
-    *   Constructs a cell graph and extracts features using GAT.
-10.  **Step 8: Ring Features** (`step8_batch_ring.py`)
-    *   Extracts intensity patterns around the nuclear boundary.
-11. **Step 9: Centroid Matching** (`step9_train_centroid_matcher.py`)
-    *   Matches predicted centroids with ground truth centroids to assign labels.
-12. **Training** (`train_nucleus_classifier_true.py`)
-    *   Trains the final MLP classifier using the fused feature set.
 
 ## Installation
 
