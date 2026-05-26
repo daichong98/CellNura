@@ -1,5 +1,5 @@
 # CellNura
- A nucleus morphology-aware deep learning for cell classification in histopathology
+ A nucleus representation-aware deep learning for cell classification in histopathology
 ## Introduction
 
 **CellNura** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
