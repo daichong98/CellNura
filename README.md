@@ -1,16 +1,16 @@
 # CellNura
- A nucleus representation-aware deep learning for cell classification in histopathology
+A nucleus representation-aware deep learning for cell classification in histopathology
 ## Introduction
 
 **CellNura** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
-*   **Local Features**: Extracted via MobileViT.
-*   **Global Features**: Extracted via Swin Transformer.
-*   **Cross-Attention Mechanism**: To effectively fuse local and global visual features.
-*   **Morphological Features**: Geometric properties of the nuclei.
-*   **Ring Features**: Texture information from the nuclear boundary.
-*   **Graph Features**: Spatial relationships captured by Graph Attention Networks (GAT).
-<img width="6129" height="2889" alt="model" src="https://github.com/user-attachments/assets/7233f6dc-ba84-42a3-962f-bb7f939748d6" />
-The workflow of the CellNura framework. The pipeline begins with (a) instance segmentation to isolate single nuclei and their masks. (b) The Multi-View Feature Extraction module then integrates four distinct feature streams: deep visual representations (combining Swin and Vision Transformers via cross-attention), morphological descriptors, chromatin distribution profiles derived from annular sampling, and microenvironmental topology features modeled by a Graph Attention Network. (c) Finally, these multi-dimensional features are fused and fed into an MLP classifier to achieve fine-grained nuclear classification..
+* **Local Features**: Extracted via MobileViT.
+* **Global Features**: Extracted via Swin Transformer.
+* **Gated Cross-Scale Fusion**: A trainable gating mechanism that injects global tissue context into the nucleus-level representation.
+* **Morphological Features**: Geometric properties of the nuclei.
+* **Ring Features**: Radial chromatin-distribution profiles from concentric-ring sampling.
+* **Graph Features**: Spatial microenvironment topology captured by a Graph Attention Network (GAT) trained on the fused representation.
+<img width="6129" height="2889" alt="model" src="https://github.com/user-attachments/assets/77cd698c-2f05-4464-ac9d-83b0b96188a2" />
+The workflow of the CellNura framework. The pipeline begins with (a) instance segmentation to isolate single nuclei and their masks. (b) The multi-view feature extraction module then integrates four distinct feature streams: deep visual representations (Swin Transformer global and MobileViT local branches combined by a fully trained gated cross-scale fusion), morphological descriptors, chromatin distribution profiles derived from annular sampling, and spatial microenvironmental topology features modeled by a graph attention network. (c) Finally, these multi-dimensional features are concatenated and fed into an MLP classifier for fine-grained nuclear classification.
 
 
 ## Installation
@@ -28,8 +28,10 @@ The workflow of the CellNura framework. The pipeline begins with (a) instance se
     
 ## Model weight 
 
-- [MobileViT](https://huggingface.co/apple/mobilevit-x-small)  
-- [Swin-T](https://github.com/microsoft/Swin-Transformer)
+- [MobileViT](https://huggingface.co/apple/mobilevit-x-small)
+- [Swin Transformer](https://github.com/microsoft/Swin-Transformer)
+- [HoVer-Net](https://github.com/vqdang/hover_net) 
+
   
 ## Dataset 
 
