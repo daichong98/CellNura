@@ -18,24 +18,23 @@ class PanNukeSwinExtractor:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Swin model configuration
+
         self.DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
         self.WINDOW_SIZE = (384, 384) 
         self.STEP_SIZE = 256 
 
-        # Load model
+
         self.model = self.load_swin_model()
 
     def load_swin_model(self):
-        """Load Swin-Base model"""
         model = timm.create_model(
-            "Swin-Base model",  ####need
+            "Swin-Base model",
             pretrained=False,
             features_only=True,
             num_classes=0
         )
 
-        # Load pre-trained weights
+
         state_dict = torch.load(self.model_path, map_location="cpu")
         state_dict = {k: v for k, v in state_dict.items() if "head" not in k}
         model.load_state_dict(state_dict, strict=False)
@@ -44,21 +43,20 @@ class PanNukeSwinExtractor:
         return model
 
     def pad_image(self, image: Image.Image, window_size: Tuple[int, int], mode='reflect') -> Image.Image:
-        """Pad image to make its size a multiple of window_size"""
         w, h = image.size
         win_w, win_h = window_size
 
-        # Calculate size to pad to
+
         new_w = ((w + win_w - 1) // win_w) * win_w
         new_h = ((h + win_h - 1) // win_h) * win_h
 
         if new_w == w and new_h == h:
             return image
 
-        # Convert to numpy array for padding
+
         img_np = np.array(image)
 
-        # Calculate padding amount
+
         top = bottom = right = left = 0
         if h % win_h != 0:
             pad_h = new_h - h
@@ -76,7 +74,6 @@ class PanNukeSwinExtractor:
         return Image.fromarray(padded_img)
 
     def sliding_window(self, image: Image.Image, window_size: Tuple[int, int], step: int) -> List[Image.Image]:
-        """Use sliding window to split large image into small patches"""
         w, h = image.size
         patches = []
 
@@ -89,7 +86,6 @@ class PanNukeSwinExtractor:
         return patches
 
     def preprocess_patch(self, patch: Image.Image) -> torch.Tensor:
-        """Single image patch preprocessing"""
         transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[
@@ -98,52 +94,51 @@ class PanNukeSwinExtractor:
         return transform(patch).unsqueeze(0).to(self.DEVICE)
 
     def extract_global_features(self, image_array):
-        """Extract global features from single HE image"""
         try:
-            # Convert NumPy array to PIL image
+
             if image_array.dtype != np.uint8:
                 image_array = (image_array * 255).astype(np.uint8)
 
-            # Ensure RGB format
-            if len(image_array.shape) == 2:  # Grayscale image
+
+            if len(image_array.shape) == 2:
                 image_array = np.stack(
                     [image_array, image_array, image_array], axis=-1)
-            elif image_array.shape[-1] == 1:  # Single channel
+            elif image_array.shape[-1] == 1:
                 image_array = np.concatenate(
                     [image_array, image_array, image_array], axis=-1)
-            elif image_array.shape[-1] > 3:  # More than 3 channels
+            elif image_array.shape[-1] > 3:
                 image_array = image_array[:, :, :3]
 
             img = Image.fromarray(image_array)
 
-            # Check image size, resize if smaller than WINDOW_SIZE
+
             if img.width < self.WINDOW_SIZE[0] or img.height < self.WINDOW_SIZE[1]:
                 print(
                     f" Image size ({img.width}x{img.height}) smaller than model requirement ({self.WINDOW_SIZE[0]}x{self.WINDOW_SIZE[1]}), resizing...")
                 img = img.resize(self.WINDOW_SIZE, Image.Resampling.LANCZOS)
 
-            # Pad image
+
             padded_img = self.pad_image(img, window_size=self.WINDOW_SIZE)
 
-            # Patch processing
+
             patches = self.sliding_window(
                 padded_img, window_size=self.WINDOW_SIZE, step=self.STEP_SIZE)
 
-            # Extract features for all patches
+
             all_features = []
             for patch in patches:
                 input_tensor = self.preprocess_patch(patch)
 
                 with torch.no_grad():
                     features = self.model(input_tensor)
-                    # (1, 1024, 12, 12)
+
                     last_layer_feat = features[-1].permute(0, 3, 1, 2)
                     pooled_feat = torch.mean(
-                        last_layer_feat, dim=(2, 3))  # (1, 1024)
+                        last_layer_feat, dim=(2, 3))
                     all_features.append(pooled_feat.cpu().numpy().flatten())
 
-            # Merge features of all patches (take mean)
-            final_feature = np.mean(all_features, axis=0)  # (1024,)
+
+            final_feature = np.mean(all_features, axis=0)
 
             return final_feature
 
@@ -152,13 +147,12 @@ class PanNukeSwinExtractor:
             return None
 
     def process_pannuke_dataset(self, pannuke_root):
-        """Process entire PanNuke dataset (all folds)"""
-        print("🏥 Start processing PanNuke dataset - Swin Transformer global feature extraction")
+        print("Start processing PanNuke dataset - Swin Transformer global feature extraction")
 
         pannuke_root = Path(pannuke_root)
         all_features = []
 
-        # Process each fold
+
         for fold_idx in range(1, 4):
             fold_dir = pannuke_root / f"Fold {fold_idx}"
             images_path = fold_dir / "images" / \
@@ -169,27 +163,27 @@ class PanNukeSwinExtractor:
                 continue
 
             try:
-                # Load image data
+
                 images = np.load(str(images_path), mmap_mode='r')
                 print(f"Loaded Fold {fold_idx} images: {images.shape}")
 
-                # Process each image
+
                 for img_idx in range(len(images)):
                     image_name = f"fold{fold_idx}_image_{img_idx:04d}"
                     print(f"Processing {image_name}...")
 
-                    # Extract global features
+
                     global_features = self.extract_global_features(
                         images[img_idx])
 
                     if global_features is not None:
-                        # Build feature dictionary
+
                         feature_dict = {
                             "image_name": image_name,
                             "fold": fold_idx
                         }
 
-                        # Add feature vector
+
                         for j, val in enumerate(global_features):
                             feature_dict[f"swin_global_{j}"] = val
 
@@ -202,19 +196,18 @@ class PanNukeSwinExtractor:
                 print(f"Failed to process Fold {fold_idx}: {e}")
 
     def save_features(self, features_list):
-        """Save features to CSV file"""
         df = pd.DataFrame(features_list)
 
-        # Sort by fold and image name
+
         df.sort_values(by=["fold", "image_name"], inplace=True)
 
-        # Save feature file
+
         output_csv = self.output_dir / "pannuke_swin_global_features.csv"
         df.to_csv(output_csv, index=False)
 
         print(f"\n Swin global features saved: {output_csv}")
 
-        # Processing statistics
+
         fold1_count = len(df[df['fold'] == 1])
         fold2_count = len(df[df['fold'] == 2])
         fold3_count = len(df[df['fold'] == 3])
@@ -230,16 +223,15 @@ class PanNukeSwinExtractor:
 
 
 def main():
-    """Main function"""
-    # Configure paths
+
     MODEL_PATH = "/path/to/swin_base_weight.pth"
     PANNUKE_ROOT = "/path/to/PanNuke_dataset"
     OUTPUT_DIR = "/path/to/output_directory"
 
-    # Create feature extractor
+
     extractor = PanNukeSwinExtractor(MODEL_PATH, OUTPUT_DIR)
 
-    # Process dataset
+
     success = extractor.process_pannuke_dataset(PANNUKE_ROOT)
     return success
 

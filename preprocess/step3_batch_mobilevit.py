@@ -25,23 +25,22 @@ class PanNukeMobileViTExtractor:
             'cuda' if torch.cuda.is_available() else 'cpu')
         self.batch_size = batch_size
 
-        # Preload model, all threads share the same model instance
+
         print(f"Loading MobileViT model (Device: {self.device})...")
         self.model, self.feature_extractor = self.load_model_and_feature_extractor()
         print("Model loading complete")
 
-        # Clean GPU cache
+
         if self.device == 'cuda':
             torch.cuda.empty_cache()
 
     def load_model_and_feature_extractor(self):
-        """Load MobileViT model and feature extractor"""
         model = MobileViTForImageClassification.from_pretrained(
             self.model_path, output_hidden_states=True
         )
 
         if self.device == 'cuda':
-            model = model.half()  # Use half precision
+            model = model.half()
 
         model = model.to(self.device)
         model.eval()
@@ -50,7 +49,6 @@ class PanNukeMobileViTExtractor:
         return model, feature_extractor
 
     def extract_nucleus_info(self, file_name):
-        """Extract image ID, nucleus ID and fold info from nucleus image filename"""
         match = re.match(
             r"fold(\d+)_image_(\d+)_nucleus_(\d+)\.png", file_name)
 
@@ -63,13 +61,12 @@ class PanNukeMobileViTExtractor:
         return None, None, None
 
     def process_nucleus_batch(self, nucleus_files, image_names):
-        """Batch process multiple nucleus images, extract MobileViT features"""
         try:
-            # Prepare batch data
+
             images = []
             valid_indices = []
 
-            # Preprocess all images
+
             for i, nucleus_file in enumerate(nucleus_files):
                 try:
                     image = Image.open(nucleus_file).convert("RGB")
@@ -82,7 +79,7 @@ class PanNukeMobileViTExtractor:
             if not images:
                 return []
 
-            # Batch preprocessing
+
             with torch.no_grad():
                 inputs = self.feature_extractor(
                     images=images, return_tensors="pt")
@@ -91,21 +88,21 @@ class PanNukeMobileViTExtractor:
                     inputs = {key: val.to(self.device)
                               for key, val in inputs.items()}
 
-                # Use mixed precision acceleration
+
                 with autocast(enabled=(self.device == 'cuda')):
                     outputs = self.model(**inputs, output_hidden_states=True)
 
-                # Get last hidden state
+
                 last_hidden_state = outputs.hidden_states[-1]
                 global_features = torch.mean(last_hidden_state, dim=(2, 3))
 
-                # Move features to CPU and convert to numpy
+
                 if self.device != 'cpu':
                     global_features = global_features.cpu()
 
                 all_features = global_features.numpy()
 
-            # Build feature dictionary list
+
             results = []
             for idx, feature_idx in enumerate(valid_indices):
                 nucleus_file = nucleus_files[feature_idx]
@@ -117,7 +114,7 @@ class PanNukeMobileViTExtractor:
                 if fold_idx is None:
                     continue
 
-                # Build feature dictionary
+
                 feature_dict = {
                     "image_name": nucleus_filename,
                     "original_image": image_name,
@@ -125,7 +122,7 @@ class PanNukeMobileViTExtractor:
                     "fold": fold_idx
                 }
 
-                # Add feature vector
+
                 for i, val in enumerate(all_features[idx]):
                     feature_dict[f"mobilevit_feature_{i}"] = val
 
@@ -138,7 +135,6 @@ class PanNukeMobileViTExtractor:
             return []
 
     def process_pannuke_dataset_batch(self, nuclei_folder, max_workers=16, gpu_batch_size=64):
-        """Use multi-threading to batch process PanNuke dataset (all folds)"""
 
         self.batch_size = gpu_batch_size
         start_time = time.time()
@@ -148,14 +144,14 @@ class PanNukeMobileViTExtractor:
             print(f"Nuclei folder does not exist: {nuclei_folder}")
             return False
 
-        # Get all nucleus files
+
         fold1_nucleus_files = list(nuclei_folder.glob("fold1_*_nucleus_*.png"))
         fold2_nucleus_files = list(nuclei_folder.glob("fold2_*_nucleus_*.png"))
         fold3_nucleus_files = list(nuclei_folder.glob("fold3_*_nucleus_*.png"))
         all_nucleus_files = fold1_nucleus_files + \
             fold2_nucleus_files + fold3_nucleus_files
 
-        # Extract unique image names
+
         image_names = set()
         for nucleus_file in all_nucleus_files:
             match = re.match(
@@ -184,18 +180,18 @@ class PanNukeMobileViTExtractor:
 
         all_features = []
 
-        # Batch process by image, avoid collecting all nuclei at once
+
         print(f"Start processing {len(image_names)} images...")
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             processed_nuclei = 0
-            total_nuclei = len(all_nucleus_files)  # Total nuclei count
+            total_nuclei = len(all_nucleus_files)
 
-            # Process images by batch
-            for batch_idx in range(0, len(image_names), 50):  # 50 images per batch
+
+            for batch_idx in range(0, len(image_names), 50):
                 batch_images = image_names[batch_idx:batch_idx+50]
 
-                # Collect nucleus files only for current batch images
+
                 batch_files = []
                 batch_img_names = []
                 for image_name in batch_images:
@@ -210,7 +206,7 @@ class PanNukeMobileViTExtractor:
                 print(
                     f"Batch {batch_idx//50 + 1}/{(len(image_names)+49)//50}: Collected {len(batch_files)} nuclei")
 
-                # Split by GPU batch
+
                 futures = []
                 for i in range(0, len(batch_files), gpu_batch_size):
                     end_idx = min(i + gpu_batch_size, len(batch_files))
@@ -222,7 +218,7 @@ class PanNukeMobileViTExtractor:
                                         sub_batch_files, sub_batch_imgs)
                     )
 
-                # Process results
+
                 batch_features = []
                 for future in tqdm(as_completed(futures), total=len(futures),
                                    desc=f"Processing batch {batch_idx//50 + 1}"):
@@ -232,7 +228,7 @@ class PanNukeMobileViTExtractor:
                 processed_nuclei += len(batch_files)
                 all_features.extend(batch_features)
 
-                # Calculate speed
+
                 elapsed_time = time.time() - start_time
                 nuclei_per_sec = processed_nuclei / elapsed_time
                 remaining_time = (total_nuclei - processed_nuclei) / \
@@ -243,11 +239,11 @@ class PanNukeMobileViTExtractor:
                 print(
                     f"Processing speed: {nuclei_per_sec:.1f} nuclei/sec | Elapsed time: {elapsed_time/60:.1f} minutes | Remaining: {remaining_time/60:.1f} minutes")
 
-                # Periodically save interim results
+
                 if len(all_features) >= 10000 and len(all_features) % 10000 < 200:
                     self.save_interim_features(all_features, processed_nuclei)
 
-        # Save all features
+
         if all_features:
             self.save_features(all_features)
             return True
@@ -255,7 +251,6 @@ class PanNukeMobileViTExtractor:
             return False
 
     def save_interim_features(self, features_list, processed_count):
-        """Save interim feature results"""
         interim_dir = self.output_dir / "interim"
         interim_dir.mkdir(exist_ok=True)
 
@@ -264,18 +259,17 @@ class PanNukeMobileViTExtractor:
         df.to_csv(interim_file, index=False)
 
     def save_features(self, features_list):
-        """Save features to CSV file"""
         df = pd.DataFrame(features_list)
 
-        # Sort by fold, original image and nucleus ID
+
         df.sort_values(by=["fold", "original_image",
                        "nucleus_id"], inplace=True)
 
-        # Save complete feature file
+
         output_csv = self.output_dir / "pannuke_mobilevit_features.csv"
         df.to_csv(output_csv, index=False)
 
-        # Processing statistics
+
         fold1_count = len(df[df['fold'] == 1])
         fold2_count = len(df[df['fold'] == 2])
         fold3_count = len(df[df['fold'] == 3])
@@ -289,29 +283,27 @@ class PanNukeMobileViTExtractor:
         print(f"  Total: {len(df)} nuclei")
         print(f"  Feature dimension: {feature_dim}")
 
-        # Save simplified version (excluding image name column, for training)
+
         training_df = df.drop(columns=["image_name", "original_image"]).copy()
         training_csv = self.output_dir / "pannuke_mobilevit_features_training.csv"
         training_df.to_csv(training_csv, index=False)
 
 
 def main():
-    """Main function"""
-    # Configure paths
+
     MODEL_PATH = "/path/to/mobilevitv3_xs_weight"
     NUCLEI_FOLDER = "./output/step2_nuclei_images"
     OUTPUT_DIR = "./output/step3_mobilevit"
 
-    # Thread count and batch size - Optimized for your hardware
-    max_workers = 32  # Fully utilize 32 threads
-    gpu_batch_size = 4096  # Increase GPU batch size to better utilize 24GB VRAM
+
+    max_workers = 32
+    gpu_batch_size = 4096
 
 
-    # Create feature extractor
     extractor = PanNukeMobileViTExtractor(
         MODEL_PATH, OUTPUT_DIR, batch_size=gpu_batch_size)
 
-    # Batch process dataset
+
     success = extractor.process_pannuke_dataset_batch(
         NUCLEI_FOLDER, max_workers, gpu_batch_size)
 
