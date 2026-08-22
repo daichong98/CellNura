@@ -597,7 +597,7 @@ def main():
     # Optimized configuration
     config = {
         # Model configuration
-        'model_path': '/path/to/segmentation/weight/hovernet_fast_pannuke_type_tf2pytorch.pth',
+        'model_path': '/path/to/segmentation/weight/hovernet.pth',
         'model_mode': 'fast',
         'gpu': '0',
         'nr_types': '6',
