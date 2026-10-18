@@ -1,0 +1,2728 @@
+{
+  "schema_version": 1,
+  "artifact": "Scheme-2 prediction-only public candidate",
+  "date": "2026-10-07",
+  "ground_truth_included": false,
+  "raw_images_included": false,
+  "weights_included": false,
+  "per_instance_gt_matches_included": false,
+  "method_comparison_task_count": 41,
+  "same_segmentation_attribution_task_count": 5,
+  "historical_frozen_tasks_retained": 36,
+  "new_or_corrected_tasks": 5,
+  "images": {
+    "consep.csv": {
+      "path": "images/consep.csv",
+      "sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "rows": 14
+    },
+    "crchisto.csv": {
+      "path": "images/crchisto.csv",
+      "sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "rows": 20
+    },
+    "pannuke_fold1.csv": {
+      "path": "images/pannuke_fold1.csv",
+      "sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "rows": 2656
+    },
+    "pannuke_fold2.csv": {
+      "path": "images/pannuke_fold2.csv",
+      "sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "rows": 2523
+    },
+    "pannuke_fold3.csv": {
+      "path": "images/pannuke_fold3.csv",
+      "sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "rows": 2722
+    }
+  },
+  "class_maps": {
+    "PanNuke": {
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "class_names": {
+        "0": "Neoplastic",
+        "1": "Inflammatory",
+        "2": "Connective",
+        "3": "Dead",
+        "4": "Epithelial"
+      },
+      "matching_radius_px": 12.0,
+      "note": "Class IDs are harmonized to the manuscript/evaluator map, not necessarily the native model map. -1 and non-real IDs are outside macro real-class averaging."
+    },
+    "CoNSeP": {
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "class_names": {
+        "0": "Inflammatory",
+        "1": "Epithelial",
+        "2": "Spindle",
+        "3": "Others"
+      },
+      "matching_radius_px": 5.0,
+      "note": "Class IDs are harmonized to the manuscript/evaluator map, not necessarily the native model map. -1 and non-real IDs are outside macro real-class averaging."
+    },
+    "CRCHisto": {
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "class_names": {
+        "0": "Inflammatory",
+        "1": "Epithelial",
+        "2": "Fibroblast",
+        "3": "Others"
+      },
+      "matching_radius_px": 10.0,
+      "note": "Class IDs are harmonized to the manuscript/evaluator map, not necessarily the native model map. -1 and non-real IDs are outside macro real-class averaging."
+    }
+  },
+  "tasks": [
+    {
+      "job_id": "crchisto_micronet_retrain",
+      "dataset": "CRCHisto",
+      "fold": null,
+      "method": "micronet",
+      "method_name": "Micro-Net within-fold retraining + shared classifier",
+      "tier": "A",
+      "source_group": "within_fold_retrain",
+      "prediction": "predictions/crchisto_micronet_retrain.csv",
+      "prediction_sha256": "843fd008678de3439c7a6ada635df651b1b9401b055621717499873568c64ba5",
+      "prediction_rows": 2269,
+      "source_prediction_sha256": "843fd008678de3439c7a6ada635df651b1b9401b055621717499873568c64ba5",
+      "source_schema": "normalized",
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 2269,
+        "M": 1334,
+        "missed": 2999,
+        "spurious": 935,
+        "cls_F1": 0.6549,
+        "plusFN_F1": 0.3135,
+        "unified_F1": 0.2671,
+        "per_class": {
+          "0": {
+            "counts": {
+              "TP": 255,
+              "FP_mis": 145,
+              "FP_spur": 288,
+              "FN_mis": 125,
+              "FN_miss": 1018,
+              "N_gt": 1398,
+              "N_pred": 688
+            },
+            "unified": {
+              "P": 0.3706,
+              "R": 0.1824,
+              "F1": 0.2445
+            }
+          },
+          "1": {
+            "counts": {
+              "TP": 253,
+              "FP_mis": 70,
+              "FP_spur": 180,
+              "FN_mis": 106,
+              "FN_miss": 995,
+              "N_gt": 1354,
+              "N_pred": 503
+            },
+            "unified": {
+              "P": 0.503,
+              "R": 0.1869,
+              "F1": 0.2725
+            }
+          },
+          "2": {
+            "counts": {
+              "TP": 310,
+              "FP_mis": 144,
+              "FP_spur": 332,
+              "FN_mis": 105,
+              "FN_miss": 686,
+              "N_gt": 1101,
+              "N_pred": 786
+            },
+            "unified": {
+              "P": 0.3944,
+              "R": 0.2816,
+              "F1": 0.3286
+            }
+          },
+          "3": {
+            "counts": {
+              "TP": 86,
+              "FP_mis": 71,
+              "FP_spur": 135,
+              "FN_mis": 94,
+              "FN_miss": 300,
+              "N_gt": 480,
+              "N_pred": 292
+            },
+            "unified": {
+              "P": 0.2945,
+              "R": 0.1792,
+              "F1": 0.2228
+            }
+          }
+        }
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "Cellvit_crchisto",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "cellvit",
+      "method_name": "Cellvit",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/Cellvit_crchisto.csv",
+      "prediction_sha256": "7d7c7a81d7ce30f6d075af17d25238c946ed414d45a1c769fc8da606a6adbc2b",
+      "prediction_rows": 5657,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 5657,
+        "M": 3345,
+        "missed": 988,
+        "spurious": 2312,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.7366350953862539,
+        "plusFN_macro_real": 0.6370360788167001,
+        "uni_macro_real": 0.5074918691290382
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "crchisto_dist",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "dist",
+      "method_name": "DIST + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/crchisto_dist.csv",
+      "prediction_sha256": "f7f605d337722bc2a53b55469ff3c90d44349cab9c83fef8bcbc885c0df28847",
+      "prediction_rows": 2695,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 2695,
+        "M": 1983,
+        "missed": 2350,
+        "spurious": 712,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.6063250109773459,
+        "plusFN_macro_real": 0.37950993057236293,
+        "uni_macro_real": 0.3410990928687697
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "crchisto_hovernet_foldtrain",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "hovernet_foldtrain",
+      "method_name": "HoVer-Net within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/crchisto_hovernet_foldtrain.csv",
+      "prediction_sha256": "e43a10a9bf1d6f7578d04ab32ca70d39c30c3f6d1c37b6acd1ede62c57b329ac",
+      "prediction_rows": 5657,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 5657,
+        "M": 3345,
+        "missed": 988,
+        "spurious": 2312,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.7761638138606749,
+        "plusFN_macro_real": 0.6700627607925403,
+        "uni_macro_real": 0.5279896973221541
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "crchisto_maskrcnn",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "maskrcnn",
+      "method_name": "Mask R-CNN (TorchVision)",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/crchisto_maskrcnn.csv",
+      "prediction_sha256": "cc1ce9ce1bba46769f2062fdf7bb1006a41ee2f431758c5bf2f94ea2be81f11d",
+      "prediction_rows": 1704,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 1704,
+        "M": 1191,
+        "missed": 3142,
+        "spurious": 513,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.6879979544144205,
+        "plusFN_macro_real": 0.2943766921677388,
+        "uni_macro_real": 0.26818652957755873
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "crchisto_cellvitpp",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "cellvitpp",
+      "method_name": "CellViT++ official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/crchisto_cellvitpp.csv",
+      "prediction_sha256": "d1ab52f5fe921b4386e6a2bcd9d5fde212192366a4783ad46928b2ef8c5abce4",
+      "prediction_rows": 6061,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 6061,
+        "M": 3453,
+        "missed": 880,
+        "spurious": 2608,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.5383674399936798,
+        "plusFN_macro_real": 0.48297728335896734,
+        "uni_macro_real": 0.36475262018502286
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "crchisto_hovernet_official",
+      "dataset": "CRCHisto",
+      "fold": "all",
+      "method": "hovernet_official",
+      "method_name": "HoVer-Net official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/crchisto_hovernet_official.csv",
+      "prediction_sha256": "6b8b23cec22259230bfd33eecff139eb82a439c2235a80b6b04f9d6788eeb13b",
+      "prediction_rows": 5359,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 5359,
+        "M": 3107,
+        "missed": 1226,
+        "spurious": 2252,
+        "duplicate_claims": 0,
+        "n_images": 20,
+        "cls_macro_real": 0.515597087345128,
+        "plusFN_macro_real": 0.44118469439947766,
+        "uni_macro_real": 0.35872217750409086
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "CellNura_V3.7_crchisto",
+      "dataset": "CRCHisto",
+      "fold": null,
+      "method": "cellnura_v3_7",
+      "method_name": "CellNura V3.7",
+      "tier": "C_same_segmentation",
+      "source_group": "same_detection_attribution",
+      "prediction": "predictions/CellNura_V3.7_crchisto.csv",
+      "prediction_sha256": "b4b777bdcdfb355a513d90a275ba060821f02f0d77776fc5638979901ff9583f",
+      "prediction_rows": 5657,
+      "image_list": "images/crchisto.csv",
+      "image_list_sha256": "95f95646c601d40ab385bfef4fe606f9127b99f16dc14b5f183fb4543fee8bb4",
+      "matching_radius_px": 10.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected": {
+        "N_gt": 4333,
+        "N_pred": 5657,
+        "M": 3345,
+        "missed": 988,
+        "spurious": 2312,
+        "cls_F1": 0.7429,
+        "plusFN_F1": 0.6339,
+        "uni_F1": 0.5573,
+        "per_class": {
+          "0": {
+            "P": 0.5453,
+            "R": 0.4692,
+            "F1": 0.5044
+          },
+          "1": {
+            "P": 0.714,
+            "R": 0.6086,
+            "F1": 0.6571
+          },
+          "2": {
+            "P": 0.6236,
+            "R": 0.6394,
+            "F1": 0.6314
+          },
+          "3": {
+            "P": 0.5793,
+            "R": 0.35,
+            "F1": 0.4364
+          }
+        }
+      },
+      "fixed_detection_base_sha256": "7d7c7a81d7ce30f6d075af17d25238c946ed414d45a1c769fc8da606a6adbc2b",
+      "source_1007_visibility": [
+        "main_table",
+        "per_class"
+      ]
+    },
+    {
+      "job_id": "consep_micronet_retrain",
+      "dataset": "CoNSeP",
+      "fold": null,
+      "method": "micronet",
+      "method_name": "Micro-Net within-fold retraining + shared classifier",
+      "tier": "A",
+      "source_group": "within_fold_retrain",
+      "prediction": "predictions/consep_micronet_retrain.csv",
+      "prediction_sha256": "24efafe4270e9af5de93622874a50862b4e8c8b33f845345ce1333251bae20b3",
+      "prediction_rows": 4426,
+      "source_prediction_sha256": "6d1ebeab83559b01ce00e30cf196a8258e078731ff3abd4081ea808ee5dde7ec",
+      "source_schema": "raw4",
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 4426,
+        "M": 2633,
+        "missed": 6144,
+        "spurious": 1793,
+        "cls_F1": 0.5594,
+        "plusFN_F1": 0.2697,
+        "unified_F1": 0.2365,
+        "per_class": {
+          "0": {
+            "counts": {
+              "TP": 584,
+              "FP_mis": 261,
+              "FP_spur": 232,
+              "FN_mis": 225,
+              "FN_miss": 829,
+              "N_gt": 1638,
+              "N_pred": 1077
+            },
+            "unified": {
+              "P": 0.5422,
+              "R": 0.3565,
+              "F1": 0.4302
+            }
+          },
+          "1": {
+            "counts": {
+              "TP": 250,
+              "FP_mis": 119,
+              "FP_spur": 529,
+              "FN_mis": 171,
+              "FN_miss": 2793,
+              "N_gt": 3214,
+              "N_pred": 898
+            },
+            "unified": {
+              "P": 0.2784,
+              "R": 0.0778,
+              "F1": 0.1216
+            }
+          },
+          "2": {
+            "counts": {
+              "TP": 978,
+              "FP_mis": 388,
+              "FP_spur": 1010,
+              "FN_mis": 236,
+              "FN_miss": 2150,
+              "N_gt": 3364,
+              "N_pred": 2376
+            },
+            "unified": {
+              "P": 0.4116,
+              "R": 0.2907,
+              "F1": 0.3408
+            }
+          },
+          "3": {
+            "counts": {
+              "TP": 17,
+              "FP_mis": 36,
+              "FP_spur": 22,
+              "FN_mis": 172,
+              "FN_miss": 372,
+              "N_gt": 561,
+              "N_pred": 75
+            },
+            "unified": {
+              "P": 0.2267,
+              "R": 0.0303,
+              "F1": 0.0535
+            }
+          }
+        }
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "Cellvit_consep",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "cellvit",
+      "method_name": "Cellvit",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/Cellvit_consep.csv",
+      "prediction_sha256": "45a3c827fd1359bb90a30c236a0043c19a7ae1f0a2f57fa2af2948a4890b8c7f",
+      "prediction_rows": 7815,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 7815,
+        "M": 4646,
+        "missed": 4131,
+        "spurious": 3169,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.6569048794267134,
+        "plusFN_macro_real": 0.4561800963842486,
+        "uni_macro_real": 0.3866404987412969
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "consep_dist",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "dist",
+      "method_name": "DIST + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/consep_dist.csv",
+      "prediction_sha256": "9f8fb0551879c407b7721f9c6453a751b69683a7c021cb97a5ee8f767102cd58",
+      "prediction_rows": 7037,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 7037,
+        "M": 5042,
+        "missed": 3735,
+        "spurious": 1995,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.5701583088309387,
+        "plusFN_macro_real": 0.4273099619249672,
+        "uni_macro_real": 0.38044666266848226
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "consep_hovernet_foldtrain",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "hovernet_foldtrain",
+      "method_name": "HoVer-Net within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/consep_hovernet_foldtrain.csv",
+      "prediction_sha256": "6996c1f161b752ec54ba25752aa816d82b8c8afb1fd5172fb210e84637f1b30c",
+      "prediction_rows": 7815,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 7815,
+        "M": 4646,
+        "missed": 4131,
+        "spurious": 3169,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.565876133625262,
+        "plusFN_macro_real": 0.4052094117802961,
+        "uni_macro_real": 0.33537112000132474
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "consep_maskrcnn",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "maskrcnn",
+      "method_name": "Mask R-CNN (TorchVision)",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/consep_maskrcnn.csv",
+      "prediction_sha256": "46ff818c77dc447b2d1b2a890fcf2735e5eb3fa9e032f224567baef42078280b",
+      "prediction_rows": 774,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 774,
+        "M": 694,
+        "missed": 8083,
+        "spurious": 80,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.4875808302044222,
+        "plusFN_macro_real": 0.12177003769298705,
+        "uni_macro_real": 0.12121701032837734
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "consep_cellvitpp",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "cellvitpp",
+      "method_name": "CellViT++ official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/consep_cellvitpp.csv",
+      "prediction_sha256": "971556036e41dc76b8a416ecb8539d8c92e55a863e7ded02470bd42ca5bdff2b",
+      "prediction_rows": 8327,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 8327,
+        "M": 6575,
+        "missed": 2202,
+        "spurious": 1752,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.7906336403316675,
+        "plusFN_macro_real": 0.664526689280619,
+        "uni_macro_real": 0.6114389061486393
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "consep_hovernet_official",
+      "dataset": "CoNSeP",
+      "fold": "all",
+      "method": "hovernet_official",
+      "method_name": "HoVer-Net official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/consep_hovernet_official.csv",
+      "prediction_sha256": "4dd4b45c26689c9120eb0744492ecd3f91f1ef82245a966ba5bedb6adde0278d",
+      "prediction_rows": 8497,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 8497,
+        "M": 5949,
+        "missed": 2828,
+        "spurious": 2548,
+        "duplicate_claims": 0,
+        "n_images": 14,
+        "cls_macro_real": 0.8359071441809425,
+        "plusFN_macro_real": 0.6679870192510546,
+        "uni_macro_real": 0.5930890303246441
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "CellNura_V3.7_consep",
+      "dataset": "CoNSeP",
+      "fold": null,
+      "method": "cellnura_v3_7",
+      "method_name": "CellNura V3.7",
+      "tier": "C_same_segmentation",
+      "source_group": "same_detection_attribution",
+      "prediction": "predictions/CellNura_V3.7_consep.csv",
+      "prediction_sha256": "22032fddf348bfa6e69550710e69d37563308ab552dd584439889bf24f505f66",
+      "prediction_rows": 7815,
+      "image_list": "images/consep.csv",
+      "image_list_sha256": "84a516d7e5e6bb3c4128354f47f96c82e6b34677f07fddddfa8340a1d2e5061d",
+      "matching_radius_px": 5.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected": {
+        "N_gt": 8777,
+        "N_pred": 7815,
+        "M": 4646,
+        "missed": 4131,
+        "spurious": 3169,
+        "cls_F1": 0.7956,
+        "plusFN_F1": 0.5444,
+        "uni_F1": 0.4734,
+        "per_class": {
+          "0": {
+            "P": 0.7193,
+            "R": 0.6538,
+            "F1": 0.685
+          },
+          "1": {
+            "P": 0.3853,
+            "R": 0.3895,
+            "F1": 0.3874
+          },
+          "2": {
+            "P": 0.4906,
+            "R": 0.343,
+            "F1": 0.4038
+          },
+          "3": {
+            "P": 0.6628,
+            "R": 0.3048,
+            "F1": 0.4176
+          }
+        }
+      },
+      "fixed_detection_base_sha256": "45a3c827fd1359bb90a30c236a0043c19a7ae1f0a2f57fa2af2948a4890b8c7f",
+      "source_1007_visibility": [
+        "main_table",
+        "per_class"
+      ]
+    },
+    {
+      "job_id": "pannuke_micronet_retrain_fold1",
+      "dataset": "PanNuke",
+      "fold": "fold1",
+      "method": "micronet",
+      "method_name": "Micro-Net within-fold retraining + shared classifier",
+      "tier": "A",
+      "source_group": "within_fold_retrain",
+      "prediction": "predictions/pannuke_micronet_retrain_fold1.csv",
+      "prediction_sha256": "13e6dddf34410901a467570a315f3ca7e440a9e9805937a44642eb2e5b9c66ff",
+      "prediction_rows": 45871,
+      "source_prediction_sha256": "13e6dddf34410901a467570a315f3ca7e440a9e9805937a44642eb2e5b9c66ff",
+      "source_schema": "normalized",
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 45871,
+        "M": 33159,
+        "missed": 30059,
+        "spurious": 12712,
+        "cls_F1": 0.7107,
+        "plusFN_F1": 0.4861,
+        "unified_F1": 0.4356,
+        "per_class": {
+          "0": {
+            "counts": {
+              "TP": 10283,
+              "FP_mis": 1929,
+              "FP_spur": 5107,
+              "FN_mis": 2823,
+              "FN_miss": 13095,
+              "N_gt": 26201,
+              "N_pred": 17319
+            },
+            "unified": {
+              "P": 0.5937,
+              "R": 0.3925,
+              "F1": 0.4726
+            }
+          },
+          "1": {
+            "counts": {
+              "TP": 3882,
+              "FP_mis": 1867,
+              "FP_spur": 978,
+              "FN_mis": 1869,
+              "FN_miss": 5069,
+              "N_gt": 10820,
+              "N_pred": 6727
+            },
+            "unified": {
+              "P": 0.5771,
+              "R": 0.3588,
+              "F1": 0.4425
+            }
+          },
+          "2": {
+            "counts": {
+              "TP": 7839,
+              "FP_mis": 3363,
+              "FP_spur": 5177,
+              "FN_mis": 2510,
+              "FN_miss": 6039,
+              "N_gt": 16388,
+              "N_pred": 16379
+            },
+            "unified": {
+              "P": 0.4786,
+              "R": 0.4783,
+              "F1": 0.4785
+            }
+          },
+          "3": {
+            "counts": {
+              "TP": 395,
+              "FP_mis": 313,
+              "FP_spur": 138,
+              "FN_mis": 131,
+              "FN_miss": 441,
+              "N_gt": 967,
+              "N_pred": 846
+            },
+            "unified": {
+              "P": 0.4669,
+              "R": 0.4085,
+              "F1": 0.4357
+            }
+          },
+          "4": {
+            "counts": {
+              "TP": 2344,
+              "FP_mis": 944,
+              "FP_spur": 1312,
+              "FN_mis": 1083,
+              "FN_miss": 5415,
+              "N_gt": 8842,
+              "N_pred": 4600
+            },
+            "unified": {
+              "P": 0.5096,
+              "R": 0.2651,
+              "F1": 0.3488
+            }
+          }
+        }
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_micronet_retrain_fold2",
+      "dataset": "PanNuke",
+      "fold": "fold2",
+      "method": "micronet",
+      "method_name": "Micro-Net within-fold retraining + shared classifier",
+      "tier": "A",
+      "source_group": "within_fold_retrain",
+      "prediction": "predictions/pannuke_micronet_retrain_fold2.csv",
+      "prediction_sha256": "b65271c625ec6ba21a1d237b88a0e598d00614be779645b18505da777ad0b08a",
+      "prediction_rows": 44392,
+      "source_prediction_sha256": "b65271c625ec6ba21a1d237b88a0e598d00614be779645b18505da777ad0b08a",
+      "source_schema": "normalized",
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 44392,
+        "M": 33470,
+        "missed": 26402,
+        "spurious": 10922,
+        "cls_F1": 0.6936,
+        "plusFN_F1": 0.4914,
+        "unified_F1": 0.4459,
+        "per_class": {
+          "0": {
+            "counts": {
+              "TP": 9589,
+              "FP_mis": 2427,
+              "FP_spur": 4479,
+              "FN_mis": 2334,
+              "FN_miss": 10808,
+              "N_gt": 22731,
+              "N_pred": 16495
+            },
+            "unified": {
+              "P": 0.5813,
+              "R": 0.4218,
+              "F1": 0.4889
+            }
+          },
+          "1": {
+            "counts": {
+              "TP": 4422,
+              "FP_mis": 2217,
+              "FP_spur": 918,
+              "FN_mis": 1668,
+              "FN_miss": 4541,
+              "N_gt": 10631,
+              "N_pred": 7557
+            },
+            "unified": {
+              "P": 0.5852,
+              "R": 0.416,
+              "F1": 0.4863
+            }
+          },
+          "2": {
+            "counts": {
+              "TP": 7499,
+              "FP_mis": 2506,
+              "FP_spur": 3941,
+              "FN_mis": 3373,
+              "FN_miss": 5884,
+              "N_gt": 16756,
+              "N_pred": 13946
+            },
+            "unified": {
+              "P": 0.5377,
+              "R": 0.4475,
+              "F1": 0.4885
+            }
+          },
+          "3": {
+            "counts": {
+              "TP": 291,
+              "FP_mis": 375,
+              "FP_spur": 85,
+              "FN_mis": 124,
+              "FN_miss": 469,
+              "N_gt": 884,
+              "N_pred": 751
+            },
+            "unified": {
+              "P": 0.3875,
+              "R": 0.3292,
+              "F1": 0.356
+            }
+          },
+          "4": {
+            "counts": {
+              "TP": 2974,
+              "FP_mis": 1170,
+              "FP_spur": 1499,
+              "FN_mis": 1196,
+              "FN_miss": 4700,
+              "N_gt": 8870,
+              "N_pred": 5643
+            },
+            "unified": {
+              "P": 0.527,
+              "R": 0.3353,
+              "F1": 0.4098
+            }
+          }
+        }
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_micronet_retrain_fold3",
+      "dataset": "PanNuke",
+      "fold": "fold3",
+      "method": "micronet",
+      "method_name": "Micro-Net within-fold retraining + shared classifier",
+      "tier": "A",
+      "source_group": "within_fold_retrain",
+      "prediction": "predictions/pannuke_micronet_retrain_fold3.csv",
+      "prediction_sha256": "a99cc960b9334c2037d6001bbcc19282dfc2a5586b14ee39b5ffb868bd75578d",
+      "prediction_rows": 47986,
+      "source_prediction_sha256": "a99cc960b9334c2037d6001bbcc19282dfc2a5586b14ee39b5ffb868bd75578d",
+      "source_schema": "normalized",
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 47986,
+        "M": 35775,
+        "missed": 30879,
+        "spurious": 12211,
+        "cls_F1": 0.6878,
+        "plusFN_F1": 0.4787,
+        "unified_F1": 0.4343,
+        "per_class": {
+          "0": {
+            "counts": {
+              "TP": 11537,
+              "FP_mis": 2625,
+              "FP_spur": 5599,
+              "FN_mis": 2387,
+              "FN_miss": 14547,
+              "N_gt": 28471,
+              "N_pred": 19761
+            },
+            "unified": {
+              "P": 0.5838,
+              "R": 0.4052,
+              "F1": 0.4784
+            }
+          },
+          "1": {
+            "counts": {
+              "TP": 4272,
+              "FP_mis": 1922,
+              "FP_spur": 833,
+              "FN_mis": 1856,
+              "FN_miss": 4697,
+              "N_gt": 10825,
+              "N_pred": 7027
+            },
+            "unified": {
+              "P": 0.6079,
+              "R": 0.3946,
+              "F1": 0.4786
+            }
+          },
+          "2": {
+            "counts": {
+              "TP": 7902,
+              "FP_mis": 2596,
+              "FP_spur": 4290,
+              "FN_mis": 3275,
+              "FN_miss": 6264,
+              "N_gt": 17441,
+              "N_pred": 14788
+            },
+            "unified": {
+              "P": 0.5344,
+              "R": 0.4531,
+              "F1": 0.4904
+            }
+          },
+          "3": {
+            "counts": {
+              "TP": 318,
+              "FP_mis": 432,
+              "FP_spur": 103,
+              "FN_mis": 182,
+              "FN_miss": 557,
+              "N_gt": 1057,
+              "N_pred": 853
+            },
+            "unified": {
+              "P": 0.3728,
+              "R": 0.3009,
+              "F1": 0.333
+            }
+          },
+          "4": {
+            "counts": {
+              "TP": 2819,
+              "FP_mis": 1352,
+              "FP_spur": 1386,
+              "FN_mis": 1227,
+              "FN_miss": 4814,
+              "N_gt": 8860,
+              "N_pred": 5557
+            },
+            "unified": {
+              "P": 0.5073,
+              "R": 0.3182,
+              "F1": 0.3911
+            }
+          }
+        }
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "Cellvit_pannuke_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "cellvit",
+      "method_name": "Cellvit",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/Cellvit_pannuke_fold1.csv",
+      "prediction_sha256": "6e3920eca96c3aa0ef15d1f38da931474f9a9e0a41735c2d79c659e5cc2e262e",
+      "prediction_rows": 60943,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 60943,
+        "M": 51264,
+        "missed": 11954,
+        "spurious": 9679,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7850225101097381,
+        "plusFN_macro_real": 0.69754970344387,
+        "uni_macro_real": 0.6483934467495156
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "Cellvit_pannuke_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "cellvit",
+      "method_name": "Cellvit",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/Cellvit_pannuke_fold2.csv",
+      "prediction_sha256": "13cfc00a7abab084ee8b4f086c7f82230941427f8f2955baf63bcc49cfb0b5fa",
+      "prediction_rows": 57918,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 57918,
+        "M": 49294,
+        "missed": 10578,
+        "spurious": 8624,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.7528666906647689,
+        "plusFN_macro_real": 0.6795937876927082,
+        "uni_macro_real": 0.6331275948592233
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "Cellvit_pannuke_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "cellvit",
+      "method_name": "Cellvit",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/Cellvit_pannuke_fold3.csv",
+      "prediction_sha256": "73eefb6bc03de7242e2914844f038ee53773ca24473a0f46fd5298235bf035e7",
+      "prediction_rows": 65730,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 65730,
+        "M": 55157,
+        "missed": 11497,
+        "spurious": 10573,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.7477554213660794,
+        "plusFN_macro_real": 0.6730829507479614,
+        "uni_macro_real": 0.6233247802353079
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_dist_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "dist",
+      "method_name": "DIST + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_dist_fold1.csv",
+      "prediction_sha256": "0a9923bab0c523c4ef312877e09cad58235001ed0bf7b8cd9308ebb55b3c71bc",
+      "prediction_rows": 63231,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 63231,
+        "M": 51255,
+        "missed": 11963,
+        "spurious": 11976,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7262238473244509,
+        "plusFN_macro_real": 0.634727403388747,
+        "uni_macro_real": 0.5796304400074717
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_dist_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "dist",
+      "method_name": "DIST + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_dist_fold2.csv",
+      "prediction_sha256": "edac9c5785a6a1dd794c6a96d7d77d86b267f609c826f84c781b1efae281ccd6",
+      "prediction_rows": 57841,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 57841,
+        "M": 47148,
+        "missed": 12724,
+        "spurious": 10693,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.7110701196100522,
+        "plusFN_macro_real": 0.6117188473584172,
+        "uni_macro_real": 0.5615654298644387
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_dist_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "dist",
+      "method_name": "DIST + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_dist_fold3.csv",
+      "prediction_sha256": "9858d46df476ca0f5e86266a6863367dd496525da16d84d4b58d03e65481fc37",
+      "prediction_rows": 60966,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 60966,
+        "M": 50847,
+        "missed": 15807,
+        "spurious": 10119,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.6883813402693247,
+        "plusFN_macro_real": 0.580036871879898,
+        "uni_macro_real": 0.5388794339626451
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_hovernet_v3_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "hovernet_v3",
+      "method_name": "HoVer-Net v3 within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_hovernet_v3_fold1.csv",
+      "prediction_sha256": "ae5ac483b173f6df556ac14cea01db921d471f5e5e796cb5c99f4f093ab23062",
+      "prediction_rows": 60943,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 60943,
+        "M": 51264,
+        "missed": 11954,
+        "spurious": 9679,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.6174815429566906,
+        "plusFN_macro_real": 0.5485411594128358,
+        "uni_macro_real": 0.5165879390581709
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_hovernet_v3_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "hovernet_v3",
+      "method_name": "HoVer-Net v3 within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_hovernet_v3_fold2.csv",
+      "prediction_sha256": "f8046511327cb1c8be742859a98db47b345a689878dce5ad12a8384bd10fb012",
+      "prediction_rows": 57918,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 57918,
+        "M": 49294,
+        "missed": 10578,
+        "spurious": 8624,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.6426788235942461,
+        "plusFN_macro_real": 0.5743696894960504,
+        "uni_macro_real": 0.5431796833650346
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_hovernet_v3_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "hovernet_v3",
+      "method_name": "HoVer-Net v3 within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_hovernet_v3_fold3.csv",
+      "prediction_sha256": "5d29c14b3061a9f9dbdcc53f5781d8bc72499d328d8db7bd1025271bcd6aef06",
+      "prediction_rows": 65730,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 65730,
+        "M": 55157,
+        "missed": 11497,
+        "spurious": 10573,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.6232340512210583,
+        "plusFN_macro_real": 0.5585726475519552,
+        "uni_macro_real": 0.5265862593263692
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_maskrcnn_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "maskrcnn",
+      "method_name": "Mask R-CNN (TorchVision)",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_maskrcnn_fold1.csv",
+      "prediction_sha256": "bf9554c3fd73429c8ec8171a3730c192182a36c7e057213639b3626fc16a63ac",
+      "prediction_rows": 61561,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 61561,
+        "M": 51784,
+        "missed": 11434,
+        "spurious": 9777,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7651446258592492,
+        "plusFN_macro_real": 0.6568670035173364,
+        "uni_macro_real": 0.6093770071641489
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_maskrcnn_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "maskrcnn",
+      "method_name": "Mask R-CNN (TorchVision)",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_maskrcnn_fold2.csv",
+      "prediction_sha256": "e9720cf5f0e272c16369ddc78468aceb5a7941610bb2301ccc58b6e046e1093e",
+      "prediction_rows": 57978,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 57978,
+        "M": 48738,
+        "missed": 11134,
+        "spurious": 9240,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.7551477859900557,
+        "plusFN_macro_real": 0.657561700272518,
+        "uni_macro_real": 0.6105232886908909
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_maskrcnn_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "maskrcnn",
+      "method_name": "Mask R-CNN (TorchVision)",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_maskrcnn_fold3.csv",
+      "prediction_sha256": "3508b5104169f80f54415b1c63e1d78d7c803fa7327b594155ffc552f3e119b3",
+      "prediction_rows": 62908,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 62908,
+        "M": 53589,
+        "missed": 13065,
+        "spurious": 9319,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.7513240618749969,
+        "plusFN_macro_real": 0.6433374580035152,
+        "uni_macro_real": 0.599688041898269
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_stardist_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "stardist",
+      "method_name": "StarDist + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_stardist_fold1.csv",
+      "prediction_sha256": "5ca5820644e7256132f7aeabef8a0b9c3305d89adf02d34d4a093a20d64a9aad",
+      "prediction_rows": 41690,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 41690,
+        "M": 38165,
+        "missed": 25053,
+        "spurious": 3525,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7188914130439338,
+        "plusFN_macro_real": 0.521339969927716,
+        "uni_macro_real": 0.5040955086470046
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_stardist_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "stardist",
+      "method_name": "StarDist + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_stardist_fold2.csv",
+      "prediction_sha256": "488cfb11ec9b47880c221d6267f9a8b4fd16d231f63c495f83976cdd25178d20",
+      "prediction_rows": 38685,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 38685,
+        "M": 35441,
+        "missed": 24431,
+        "spurious": 3244,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.7006103263401505,
+        "plusFN_macro_real": 0.506914402015081,
+        "uni_macro_real": 0.49059045016495234
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_stardist_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "stardist",
+      "method_name": "StarDist + shared classifier",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_stardist_fold3.csv",
+      "prediction_sha256": "2d2a2f962a809dfcef888c1322b1f06d2b48bd211edef69b9708b8752068342a",
+      "prediction_rows": 42869,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 42869,
+        "M": 39390,
+        "missed": 27264,
+        "spurious": 3479,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.6983930456299892,
+        "plusFN_macro_real": 0.5052779257402997,
+        "uni_macro_real": 0.48920122292724677
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_tsfd_retrain_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "tsfd_retrain",
+      "method_name": "TSFD-Net within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tsfd_retrain_fold1.csv",
+      "prediction_sha256": "3d8553aadf781b814d2fde5798f2f6ace2f1eef474aaada4ad81d738d8ff8fdf",
+      "prediction_rows": 71620,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 71620,
+        "M": 54817,
+        "missed": 8401,
+        "spurious": 16803,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7050998020052188,
+        "plusFN_macro_real": 0.6419777556107851,
+        "uni_macro_real": 0.5719806839687165
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_tsfd_retrain_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "tsfd_retrain",
+      "method_name": "TSFD-Net within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tsfd_retrain_fold2.csv",
+      "prediction_sha256": "c3ebf38d691646793ae4e9022614fa24bee46ae2847f6d97db0da84c15d1874c",
+      "prediction_rows": 67682,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 67682,
+        "M": 51800,
+        "missed": 8072,
+        "spurious": 15882,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.6632819637916747,
+        "plusFN_macro_real": 0.6180842552610999,
+        "uni_macro_real": 0.5455143480983647
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_tsfd_retrain_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "tsfd_retrain",
+      "method_name": "TSFD-Net within-fold retraining",
+      "tier": "A",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tsfd_retrain_fold3.csv",
+      "prediction_sha256": "d77f97b21ffc67335f4d399f02bbd862ea9ae07f77f097d02d2ec85a4ab572e5",
+      "prediction_rows": 72968,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 72968,
+        "M": 56753,
+        "missed": 9901,
+        "spurious": 16215,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.7526701893774641,
+        "plusFN_macro_real": 0.6787135726193627,
+        "uni_macro_real": 0.6073005346622357
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_cellvit_sam_B_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "cellvit_sam_B",
+      "method_name": "CellViT++ official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_cellvit_sam_B_fold1.csv",
+      "prediction_sha256": "c5cacd1d0dba79e87167f9704e7f5c7830192d9425a46fd91cbda5eb6413f12d",
+      "prediction_rows": 59991,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 59991,
+        "M": 56547,
+        "missed": 6671,
+        "spurious": 3444,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.9467857933327632,
+        "plusFN_macro_real": 0.8771905241644544,
+        "uni_macro_real": 0.856533780384186
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ],
+      "source_1007_alias": "CellViT++ official weight is the CellViT-SAM-H-x40 checkpoint; this is that prediction"
+    },
+    {
+      "job_id": "pannuke_cellvit_sam_B_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "cellvit_sam_B",
+      "method_name": "CellViT++ official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_cellvit_sam_B_fold2.csv",
+      "prediction_sha256": "4245f59250f27b31a8c4867947c72414c8e97d9a37bf556e34d4dd9da91acea8",
+      "prediction_rows": 56535,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 56535,
+        "M": 53288,
+        "missed": 6584,
+        "spurious": 3247,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.9439275600288581,
+        "plusFN_macro_real": 0.8750655301125807,
+        "uni_macro_real": 0.8537853726008814
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ],
+      "source_1007_alias": "CellViT++ official weight is the CellViT-SAM-H-x40 checkpoint; this is that prediction"
+    },
+    {
+      "job_id": "pannuke_cellvit_sam_B_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "cellvit_sam_B",
+      "method_name": "CellViT++ official weights",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_cellvit_sam_B_fold3.csv",
+      "prediction_sha256": "b674c99201bd128a01407e60189432ea30b1b901b0b3254805794532fea959ef",
+      "prediction_rows": 63297,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 63297,
+        "M": 59647,
+        "missed": 7007,
+        "spurious": 3650,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.9503617509227299,
+        "plusFN_macro_real": 0.8836510952758821,
+        "uni_macro_real": 0.8632476257526582
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ],
+      "source_1007_alias": "CellViT++ official weight is the CellViT-SAM-H-x40 checkpoint; this is that prediction"
+    },
+    {
+      "job_id": "pannuke_tphead_fold1",
+      "dataset": "PanNuke",
+      "fold": 1,
+      "method": "tphead",
+      "method_name": "HoVer-Net official type head",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tphead_fold1.csv",
+      "prediction_sha256": "e81a968c45d64e6b1ed003367b029697c5fef70725777d669c96540216465189",
+      "prediction_rows": 43521,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 43521,
+        "M": 37517,
+        "missed": 25701,
+        "spurious": 6004,
+        "duplicate_claims": 0,
+        "n_images": 2656,
+        "cls_macro_real": 0.7499550071606753,
+        "plusFN_macro_real": 0.5683019055488978,
+        "uni_macro_real": 0.5351992767576949
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_tphead_fold2",
+      "dataset": "PanNuke",
+      "fold": 2,
+      "method": "tphead",
+      "method_name": "HoVer-Net official type head",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tphead_fold2.csv",
+      "prediction_sha256": "0d5076d68bbf110bf571148a74765ad14e8d2dd448245c167b96839699dd21dc",
+      "prediction_rows": 41200,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 41200,
+        "M": 35468,
+        "missed": 24404,
+        "spurious": 5732,
+        "duplicate_claims": 0,
+        "n_images": 2523,
+        "cls_macro_real": 0.7065983130630658,
+        "plusFN_macro_real": 0.5358547693020983,
+        "uni_macro_real": 0.5059546288474486
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "pannuke_tphead_fold3",
+      "dataset": "PanNuke",
+      "fold": 3,
+      "method": "tphead",
+      "method_name": "HoVer-Net official type head",
+      "tier": "B",
+      "source_group": "frozen_task",
+      "prediction": "predictions/pannuke_tphead_fold3.csv",
+      "prediction_sha256": "1c32ad32421f2f23672524c615f6a2002905d383722fd864e27d05e81197b558",
+      "prediction_rows": 45550,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 45550,
+        "M": 39292,
+        "missed": 27362,
+        "spurious": 6258,
+        "duplicate_claims": 0,
+        "n_images": 2722,
+        "cls_macro_real": 0.7067183484482594,
+        "plusFN_macro_real": 0.5339251432120015,
+        "uni_macro_real": 0.50371734978859
+      },
+      "source_1007_visibility": [
+        "main_table"
+      ]
+    },
+    {
+      "job_id": "CellNura_V3.7_pannuke_fold1",
+      "dataset": "PanNuke",
+      "fold": "fold1",
+      "method": "cellnura_v3_7",
+      "method_name": "CellNura V3.7",
+      "tier": "C_same_segmentation",
+      "source_group": "same_detection_attribution",
+      "prediction": "predictions/CellNura_V3.7_pannuke_fold1.csv",
+      "prediction_sha256": "8191896ceda1656eb524e001c1997e86ffcab420a049a8547997a31817f0ef7d",
+      "prediction_rows": 60943,
+      "image_list": "images/pannuke_fold1.csv",
+      "image_list_sha256": "983f45d5bc0a28d9456bf02658205b70941004d028c201a3efb8c6113c33b415",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 63218,
+        "N_pred": 60943,
+        "M": 51264,
+        "missed": 11954,
+        "spurious": 9679,
+        "cls_F1": 0.7975,
+        "plusFN_F1": 0.7063,
+        "uni_F1": 0.6665,
+        "per_class": {
+          "0": {
+            "P": 0.7807,
+            "R": 0.6959,
+            "F1": 0.7359
+          },
+          "1": {
+            "P": 0.7162,
+            "R": 0.6917,
+            "F1": 0.7037
+          },
+          "2": {
+            "P": 0.6426,
+            "R": 0.579,
+            "F1": 0.6091
+          },
+          "3": {
+            "P": 0.5523,
+            "R": 0.4912,
+            "F1": 0.52
+          },
+          "4": {
+            "P": 0.8055,
+            "R": 0.7264,
+            "F1": 0.7639
+          }
+        }
+      },
+      "fixed_detection_base_sha256": "6e3920eca96c3aa0ef15d1f38da931474f9a9e0a41735c2d79c659e5cc2e262e",
+      "source_1007_visibility": [
+        "main_table",
+        "per_class"
+      ]
+    },
+    {
+      "job_id": "CellNura_V3.7_pannuke_fold2",
+      "dataset": "PanNuke",
+      "fold": "fold2",
+      "method": "cellnura_v3_7",
+      "method_name": "CellNura V3.7",
+      "tier": "C_same_segmentation",
+      "source_group": "same_detection_attribution",
+      "prediction": "predictions/CellNura_V3.7_pannuke_fold2.csv",
+      "prediction_sha256": "1ba45311f1c43af720665745c47e7d1d67a80d189493a6be749d280d1c725295",
+      "prediction_rows": 57918,
+      "image_list": "images/pannuke_fold2.csv",
+      "image_list_sha256": "8c47cf713ddec756c4eb30b2f38492ba002c719817a611e3c6c71cc74e968b72",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 59872,
+        "N_pred": 57918,
+        "M": 49294,
+        "missed": 10578,
+        "spurious": 8624,
+        "cls_F1": 0.7888,
+        "plusFN_F1": 0.7078,
+        "uni_F1": 0.6704,
+        "per_class": {
+          "0": {
+            "P": 0.7688,
+            "R": 0.7086,
+            "F1": 0.7375
+          },
+          "1": {
+            "P": 0.7368,
+            "R": 0.6895,
+            "F1": 0.7124
+          },
+          "2": {
+            "P": 0.6537,
+            "R": 0.574,
+            "F1": 0.6113
+          },
+          "3": {
+            "P": 0.5026,
+            "R": 0.5452,
+            "F1": 0.5231
+          },
+          "4": {
+            "P": 0.8038,
+            "R": 0.7352,
+            "F1": 0.7679
+          }
+        }
+      },
+      "fixed_detection_base_sha256": "13cfc00a7abab084ee8b4f086c7f82230941427f8f2955baf63bcc49cfb0b5fa",
+      "source_1007_visibility": [
+        "main_table",
+        "per_class"
+      ]
+    },
+    {
+      "job_id": "CellNura_V3.7_pannuke_fold3",
+      "dataset": "PanNuke",
+      "fold": "fold3",
+      "method": "cellnura_v3_7",
+      "method_name": "CellNura V3.7",
+      "tier": "C_same_segmentation",
+      "source_group": "same_detection_attribution",
+      "prediction": "predictions/CellNura_V3.7_pannuke_fold3.csv",
+      "prediction_sha256": "5aabfbeb7eabe0916759d9cc6f413bf63aea7b272dc1a45e48776e4a19c9e844",
+      "prediction_rows": 65730,
+      "image_list": "images/pannuke_fold3.csv",
+      "image_list_sha256": "272d9aad0a57b8376ff93bdefec8db5991a15f881744dd977515b9e768b40161",
+      "matching_radius_px": 12.0,
+      "real_class_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "allowed_class_ids": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": {
+        "N_gt": 66654,
+        "N_pred": 65730,
+        "M": 55157,
+        "missed": 11497,
+        "spurious": 10573,
+        "cls_F1": 0.7721,
+        "plusFN_F1": 0.6906,
+        "uni_F1": 0.6503,
+        "per_class": {
+          "0": {
+            "P": 0.7645,
+            "R": 0.7375,
+            "F1": 0.7508
+          },
+          "1": {
+            "P": 0.715,
+            "R": 0.6988,
+            "F1": 0.7068
+          },
+          "2": {
+            "P": 0.656,
+            "R": 0.5712,
+            "F1": 0.6107
+          },
+          "3": {
+            "P": 0.4481,
+            "R": 0.4002,
+            "F1": 0.4228
+          },
+          "4": {
+            "P": 0.8039,
+            "R": 0.7219,
+            "F1": 0.7607
+          }
+        }
+      },
+      "fixed_detection_base_sha256": "73eefb6bc03de7242e2914844f038ee53773ca24473a0f46fd5298235bf035e7",
+      "source_1007_visibility": [
+        "main_table",
+        "per_class"
+      ]
+    }
+  ],
+  "expected_public_GT": {
+    "csv_schema": [
+      "image_id",
+      "instance_id",
+      "cx",
+      "cy",
+      "class_id"
+    ],
+    "coordinate_definition": "zero-based pixel coordinates; cx is column mean and cy is row mean for mask-derived centroids",
+    "files": {
+      "consep.csv": {
+        "rows": 8777,
+        "bytes": 442285,
+        "sha256": "d8c3652bb7486b6ac10a6cd6966fc153cbf726a87506bed46d95025ed7706a3f"
+      },
+      "crchisto.csv": {
+        "rows": 4333,
+        "bytes": 185364,
+        "sha256": "f971e1e58f4f12568ff948270912cdaeec88e4089e0989989c7cb0eb4a28be5d"
+      },
+      "pannuke_fold1.csv": {
+        "rows": 63218,
+        "bytes": 3717186,
+        "sha256": "09dc6f0c4e32307746aa489c1df8d99372a0233223c70c43b119f313f93d53d3"
+      },
+      "pannuke_fold2.csv": {
+        "rows": 59872,
+        "bytes": 3514580,
+        "sha256": "ae0fce2cc402129c315970f56f808a261f5fd2460b56a019f3344c2948d7ea64"
+      },
+      "pannuke_fold3.csv": {
+        "rows": 66654,
+        "bytes": 3920267,
+        "sha256": "8c906bb9e646d6c925d59f5df7de238cc814eb6a21ef55d9fdcd2b9290b4d93b"
+      }
+    },
+    "class_mappings": {
+      "pannuke": "mask channels 0,1,2,3,4 map directly to evaluation classes 0,1,2,3,4; channel 5 is ignored",
+      "consep": {
+        "1": 3,
+        "2": 0,
+        "3": 1,
+        "4": 1,
+        "5": 2,
+        "6": 2,
+        "7": 2
+      },
+      "crchisto": {
+        "inflammatory": 0,
+        "epithelial": 1,
+        "fibroblast": 2,
+        "others": 3
+      }
+    }
+  },
+  "evaluator_sha256": "7c5163b93efc6c14a65b90544c443d060b527c65ace3aacd0a6d7aea50c09098",
+  "training_split_manifest": {
+    "path": "training_split_manifest.csv",
+    "sha256": "1afcdb0c20c01434c6a0aff18ae7c7b0c058ab88cf3e541eafe2ac6a30a38c47",
+    "rows": 23844,
+    "unit": "image/tile",
+    "scope": "five dataset/fold role partitions"
+  },
+  "segmentation_checkpoint_identities": {
+    "path": "segmentation_checkpoint_identities.csv",
+    "sha256": "cedaf2b119276f218ef2b6f4584c709254dd72e8f4f2e2b7bdef50d6f35b0a10",
+    "rows": 5,
+    "weights_included": false
+  },
+  "ground_truth_rebuild_script": {
+    "path": "rebuild_ground_truth.py",
+    "sha256": "c23452088de606c7c748b2efa7fc7c1f8752f0319f475779ff96d90aba283419",
+    "expected_registration_path": "expected_ground_truth.json",
+    "expected_registration_sha256": "b7b47992c11a0b6139a072216ea9086004514699c7346db5402d441d89924aa0",
+    "reconstructed_GT_included": false,
+    "upstream_original_sha256": "ac24b3ff5aaf7050c70e94cfcec3348422d48fc870ccba32e63ffc3543c02f8b",
+    "detached_adaptations": "Default artifact root points here; output within prediction-only package is refused."
+  },
+  "selected_method_inventory": {
+    "path": "SOURCE_SCOPE.csv",
+    "sha256": "f556c5a006ca343f67f2e398e43819276038295b32d4b41411e6d6ff7d909678",
+    "rows": 26
+  }
+}
