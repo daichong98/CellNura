@@ -4,13 +4,13 @@ A nucleus representation-aware deep learning for cell classification in histopat
 
 **CellNura** is a comprehensive deep learning pipeline designed for precise segmentation and classification of nuclei in pathology images. It leverages a multi-feature fusion strategy, combining:
 * **Local Features**: Extracted via MobileViT.
-* **Global Features**: Extracted via Swin Transformer.
+* **Global Features**: Extracted via Swin-Base.
 * **Gated Cross-Scale Fusion**: A trainable gating mechanism that injects global tissue context into the nucleus-level representation.
 * **Morphological Features**: Geometric properties of the nuclei.
 * **Ring Features**: Radial chromatin-distribution profiles from concentric-ring sampling.
 * **Graph Features**: Spatial microenvironment topology captured by a Graph Attention Network (GAT) trained on the fused representation.
-<img width="6129" height="2889" alt="model" src="https://github.com/user-attachments/assets/77cd698c-2f05-4464-ac9d-83b0b96188a2" />
-The workflow of the CellNura framework. The pipeline begins with (a) instance segmentation to isolate single nuclei and their masks. (b) The multi-view feature extraction module then integrates four distinct feature streams: deep visual representations (Swin Transformer global and MobileViT local branches combined by a fully trained gated cross-scale fusion), morphological descriptors, chromatin distribution profiles derived from annular sampling, and spatial microenvironmental topology features modeled by a graph attention network. (c) Finally, these multi-dimensional features are concatenated and fed into an MLP classifier for fine-grained nuclear classification.
+<img width="4086" height="1926" alt="Figure1" src="https://github.com/user-attachments/assets/6e7d5bb8-d8a4-4b3c-9b23-0d6bf91f42a2" />
+Overview of the CellNura architecture. (a) Instance segmentation provides individual nuclear masks and centroids. (b) The multi-view feature extraction module then integrates four distinct feature streams: visual representations from Swin-Base and MobileViT branches combined through a trainable gated cross-scale fusion module, morphological descriptors, radial chromatin intensity profiles derived from annular sampling, and learned spatial-neighborhood embeddings produced by a graph attention network. (c) Finally, these multi-dimensional features are concatenated and fed into an MLP classifier for fine-grained nuclear classification.
 
 
 ## Installation
