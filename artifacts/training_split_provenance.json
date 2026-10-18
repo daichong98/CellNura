@@ -1,0 +1,24 @@
+{
+  "operation": "Explicitly materialize existing internal image splits; not a new random partition",
+  "original_split_sha256": "3c1b4d69463aa2ac3aab0302f1771104b6a47124c3ac997117bea6000bfaaefc",
+  "external_validation_definitions_sha256": "d8a1d5773e76acd7393708526bd0033938e769f13607a9f3ee6488b1f2a4f255",
+  "external_datasets": {
+    "CoNSeP": {
+      "train": 22,
+      "val": 5,
+      "test": 14,
+      "definition_source_sha256": "5cffd5dae5ac0b31c9fb1925efd799937bfb71a9304d409b16a970cad0ac508a",
+      "original_test_images_unchanged": true
+    },
+    "CRCHisto": {
+      "train": 68,
+      "val": 12,
+      "test": 20,
+      "definition_source_sha256": "d80e5c7111007125dd309b9873f986fc4b58f08d540bdcbdc070890a2ff1300c",
+      "original_test_images_unchanged": true
+    }
+  },
+  "training_split_sha256": "f8d5ac83446f0803b21ec773eb7c29d26baff9ae22d4161d4e92661e9c06edd4",
+  "row_count": 23844,
+  "pannuke_roles_unchanged": true
+}
