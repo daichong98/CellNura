@@ -15,8 +15,8 @@ CellNura classifies nuclei in histopathology images from an instance segmentatio
 - **Chromatin ring features.** Thirty-six radial chromatin measurements, `FR1_2` and `FR3`–`FR37`.
 - **Graph features.** A graph attention network summarizes the spatial neighborhood of each nucleus.
 - **MLP classifier.** The concatenated representation is classified by an MLP. Dropout is 0.3. Class weights are `1/sqrt(n_k)`.
-
-The pipeline is segmentation followed by classification. It is not one end-to-end network. Instance segmentation isolates each nucleus. The feature module then builds the visual, morphological, chromatin, and neighborhood representation. The MLP assigns the nucleus class.
+<img width="4086" height="1926" alt="Figure1" src="https://github.com/user-attachments/assets/b3e4f4ac-9b48-4949-b661-bdeffd269f4b" />
+Overview of the CellNura architecture. (a) Instance segmentation provides individual nuclear masks and centroids. (b) The multi-view feature extraction module then integrates four distinct feature streams: visual representations from Swin-Base and MobileViT branches combined through a trainable gated cross-scale fusion module, morphological descriptors, radial chromatin intensity profiles derived from annular sampling, and learned spatial-neighborhood embeddings produced by a graph attention network. (c) Finally, these multi-dimensional features are concatenated and fed into an MLP classifier for fine-grained nuclear classification.
 
 ## Repository layout
 
