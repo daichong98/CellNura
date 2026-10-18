@@ -62,7 +62,3 @@ python -m cellnura_release baseline --help
 ```
 
 Training uses the image-level splits recorded in `artifacts/`.
-
-## Third-party code
-
-Third-party source retains its upstream licenses under `third_party/`. This package does not grant additional rights to upstream code.
