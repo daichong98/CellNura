@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "csv_schema": ["image_id", "instance_id", "cx", "cy", "class_id"],
+  "coordinate_definition": "zero-based pixel coordinates; cx is column mean and cy is row mean for mask-derived centroids",
+  "files": {
+    "consep.csv": {
+      "rows": 8777,
+      "bytes": 442285,
+      "sha256": "d8c3652bb7486b6ac10a6cd6966fc153cbf726a87506bed46d95025ed7706a3f"
+    },
+    "crchisto.csv": {
+      "rows": 4333,
+      "bytes": 185364,
+      "sha256": "f971e1e58f4f12568ff948270912cdaeec88e4089e0989989c7cb0eb4a28be5d"
+    },
+    "pannuke_fold1.csv": {
+      "rows": 63218,
+      "bytes": 3717186,
+      "sha256": "09dc6f0c4e32307746aa489c1df8d99372a0233223c70c43b119f313f93d53d3"
+    },
+    "pannuke_fold2.csv": {
+      "rows": 59872,
+      "bytes": 3514580,
+      "sha256": "ae0fce2cc402129c315970f56f808a261f5fd2460b56a019f3344c2948d7ea64"
+    },
+    "pannuke_fold3.csv": {
+      "rows": 66654,
+      "bytes": 3920267,
+      "sha256": "8c906bb9e646d6c925d59f5df7de238cc814eb6a21ef55d9fdcd2b9290b4d93b"
+    }
+  },
+  "class_mappings": {
+    "pannuke": "mask channels 0,1,2,3,4 map directly to evaluation classes 0,1,2,3,4; channel 5 is ignored",
+    "consep": {"1": 3, "2": 0, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2},
+    "crchisto": {"inflammatory": 0, "epithelial": 1, "fibroblast": 2, "others": 3}
+  }
+}
