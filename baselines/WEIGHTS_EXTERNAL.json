@@ -1,0 +1,39 @@
+{
+  "weights_distributed": false,
+  "role": "CellViT-256 encoder and type head trained from scratch and read at CellNura detection centroids. Not the official CellViT++ weight.",
+  "initialization": "scratch",
+  "validation_unit": "image",
+  "identity_source": "configs/release.json baselines.cellnura_cellvit.checkpoint_sha256",
+  "checkpoints": [
+    {
+      "key": "pannuke_fold1",
+      "dataset": "PanNuke",
+      "outer_fold": 1,
+      "sha256": "7009bed33aea08d8a7339423deaa72d09c15a420a1e891af75f68441f57955ce"
+    },
+    {
+      "key": "pannuke_fold2",
+      "dataset": "PanNuke",
+      "outer_fold": 2,
+      "sha256": "f37111143293f213be4e4b7266d8bbcc48e4ae130c77bcee6af01d098c2a669a"
+    },
+    {
+      "key": "pannuke_fold3",
+      "dataset": "PanNuke",
+      "outer_fold": 3,
+      "sha256": "6da606037bb3854e73cca128291c82df299894d15ec34f94dd71bd3e8c1d7ab4"
+    },
+    {
+      "key": "consep",
+      "dataset": "CoNSeP",
+      "outer_fold": null,
+      "sha256": "e28e15eab4bb0dabb95c4606febbd276d408ea1b179a58b60fbc3fb92f5c1153"
+    },
+    {
+      "key": "crchisto",
+      "dataset": "CRCHisto",
+      "outer_fold": null,
+      "sha256": "848feaa50cf587d00ac5e7cd5390f40e8cbaf8eba2d92559e40f0df6da41de42"
+    }
+  ]
+}

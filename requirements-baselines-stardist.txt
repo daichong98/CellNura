@@ -1,0 +1,3 @@
+-r requirements-baselines-tensorflow.txt
+stardist==0.9.1
+csbdeep==0.8.2

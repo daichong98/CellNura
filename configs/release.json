@@ -1,0 +1,170 @@
+{
+  "release_id": "cellnura-second-revision-v3",
+  "delivery_profile": "code-only",
+  "path_base": "..",
+  "paths": {
+    "artifacts": "artifacts",
+    "split_manifest": "artifacts/training_split_manifest.csv",
+    "image_index": "data/image_index.csv",
+    "segmentation_index": "data/segmentation_index.csv",
+    "training_ground_truth": "data/training_ground_truth.csv",
+    "swin_checkpoint": "weights/swin_base_patch4_window12_384_22k.pth",
+    "mobilevit_checkpoint": "weights/mobilevitv3_xs",
+    "output_root": "outputs"
+  },
+  "backbones": {
+    "swin": {
+      "model": "swin_base_patch4_window12_384",
+      "sha256": "70812ab6b0a7a38712409d13976df9431632466eaacf991d5e90d9a1e91f3ab1",
+      "features": 1024,
+      "resize": 384,
+      "interpolation": "LANCZOS",
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    },
+    "mobilevit": {
+      "architecture": "MobileViTForImageClassification",
+      "features": 96,
+      "crop_resize": 64,
+      "interpolation": "BILINEAR",
+      "channel_policy": "historical_v35_opencv_png_roundtrip",
+      "file_sha256": {
+        "config.json": "44300d199ca851a29d795ae72cd30c84280967b3b4974cf39f516789d6676f86",
+        "model.safetensors": "084348bc0fec1d69406831d5edcf58eaad4b9c4f406a32f6ed962c5d41747c72",
+        "preprocessor_config.json": "a180a6fd1decb7352684634f45c22f2057bb17fcb7d54b0eade99f8f5187fb6b"
+      }
+    }
+  },
+  "baseline_paths": {
+    "pannuke": "data/PanNuke_dataset",
+    "consep": "data/CoNSeP",
+    "crchisto": "data/CRCHisto",
+    "stardist_weight_dir": "weights/2D_versatile_he",
+    "cellvit_sam_weight": "weights/CellViT-SAM-H-x40.pth",
+    "cellvitpp_head_weight": "weights/cellvitpp-consep.pth",
+    "cellvit_weight": "weights/Cellvit.pth",
+    "hovernet_official_weight": "weights/hovernet_original_consep_type_tf2pytorch.tar",
+    "tsfd_public_weight": "weights/tsfd-public-model.h5",
+    "resnet18_imagenet_weight": "weights/resnet18-f37072fd.pth",
+    "maskrcnn_coco_weight": "weights/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth",
+    "traditional_features": "data/traditional_features",
+    "tsfd_boundary_reference": "third_party/tsfd_boundary_reference.py",
+    "split_manifest": "artifacts/split_manifest.csv"
+  },
+  "baselines": {
+    "maskrcnn": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "maskrcnn_coco_weight": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+      },
+      "options": {}
+    },
+    "dist": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "resnet18_imagenet_weight": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+      },
+      "options": {}
+    },
+    "micronet": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "resnet18_imagenet_weight": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+      },
+      "options": {}
+    },
+    "stardist": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "stardist_weight_dir": {
+          "config.json": "47531372d6436172c94be44882c4c74f8c8edeb4843dba47a89a7782673daccd",
+          "thresholds.json": "05a10c871bb32735e86a1ed2ff5c756e7d207beb1142b6d3c470198b41e93fa6",
+          "weights_best.h5": "ce23a21f09511132c51e2c7b077054355b6b0c1cbece61066dd280054ee7178f"
+        },
+        "resnet18_imagenet_weight": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+      },
+      "options": {}
+    },
+    "hovernet": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {},
+      "options": {}
+    },
+    "tsfd": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {},
+      "options": {}
+    },
+    "cellvitpp": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "cellvit_sam_weight": "b324c10fddb0f80f5ab03a0459453a4c4848866934daf63435b46749a6b278cf",
+        "cellvitpp_head_weight": "23f4770f363389124d201a8c34557b9d4dc5a13360b6193edee4be2b1dbbbdcd"
+      },
+      "options": {}
+    },
+    "hovernet_official": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "hovernet_official_weight": "5d1191d6bf72a077911aef12a75484ee3cab91ed81e7880c0361157094ff451d"
+      },
+      "options": {},
+      "official_mode": "original"
+    },
+    "hovernet_tphead": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {},
+      "options": {}
+    },
+    "tsfd_public": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {
+        "tsfd_public_weight": "01622a4dcf353f93b3ba71e82de34b90a6a482a9e2afcbd95dba0e6ff3f1615a"
+      },
+      "options": {}
+    },
+    "traditional": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {},
+      "options": {}
+    },
+    "cellnura_cellvit": {
+      "python": null,
+      "classifier_python": null,
+      "weight_sha256": {},
+      "options": {},
+      "checkpoints": {},
+      "checkpoint_sha256": {
+        "consep": "e28e15eab4bb0dabb95c4606febbd276d408ea1b179a58b60fbc3fb92f5c1153",
+        "crchisto": "848feaa50cf587d00ac5e7cd5390f40e8cbaf8eba2d92559e40f0df6da41de42",
+        "pannuke_fold1": "7009bed33aea08d8a7339423deaa72d09c15a420a1e891af75f68441f57955ce",
+        "pannuke_fold2": "f37111143293f213be4e4b7266d8bbcc48e4ae130c77bcee6af01d098c2a669a",
+        "pannuke_fold3": "6da606037bb3854e73cca128291c82df299894d15ec34f94dd71bd3e8c1d7ab4"
+      },
+      "frozen_detections": {
+        "pannuke": {},
+        "consep": "",
+        "crchisto": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "architectures": [
+    "MobileViTForImageClassification"
+  ],
+  "model_type": "mobilevit",
+  "hidden_sizes": [
+    96,
+    120,
+    144
+  ],
+  "neck_hidden_sizes": [
+    16,
+    32,
+    48,
+    64,
+    80,
+    96,
+    384
+  ],
+  "transformers_version": "4.51.3",
+  "_name_or_path": null,
+  "declared_upstream_in_original_release_readme": "https://huggingface.co/apple/mobilevit-x-small",
+  "identity_status": "Local weight/config/processor pinned by SHA256; upstream tensor identity not independently reverified",
+  "folder_name_is_not_architecture_proof": true
+}
