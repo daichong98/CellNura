@@ -24,7 +24,7 @@ Raw images, original annotations, and model weights are obtained separately:
 - [CoNSeP](https://github.com/vqdang/hover_net)
 - [CRCHisto](https://warwick.ac.uk/fac/sci/dcs/research/tia/data/)
 
-Set local paths in [configs/release.json](configs/release.json), which also records backbone identities and weight hashes. Baseline protocols and weight requirements are documented in [docs/BASELINES.md](docs/BASELINES.md) and [baselines/WEIGHTS_EXTERNAL.json](baselines/WEIGHTS_EXTERNAL.json).
+Set local paths in configs/release.json, which also records backbone identities and weight hashes. Baseline protocols and weight requirements are documented in docs/BASELINES.md and baselines/WEIGHTS_EXTERNAL.json.
 
 ## Repository layout
 
@@ -48,7 +48,7 @@ python verify_candidate.py
 
 This checks the integrity of 46 prediction tasks, image lists, and 214 real-class records. It does not score predictions against annotations.
 
-For ground-truth reconstruction, numerical replay, and bootstrap comparisons, follow [Result/README.md](Result/README.md#verification-and-reproduction). These steps require the original dataset annotations. Matching and class mappings are described in [docs/EVALUATION_PROTOCOL.md](docs/EVALUATION_PROTOCOL.md).
+For ground-truth reconstruction, numerical replay, and bootstrap comparisons, follow Result/README.md. These steps require the original dataset annotations. Matching and class mappings are described in docs/EVALUATION_PROTOCOL.md.
 
 ## Training and inference
 
