@@ -1,0 +1,30 @@
+{
+  "run_id": "hovernet_v3_fast_pannuke_testfold3",
+  "task": "T06.1 v3 (single /255 + official NP semantics)",
+  "model": "HoVerNet-fast nr_types=6 (scratch)",
+  "input_scaling": "0-255 float; network internal /255 (single)",
+  "test_fold": 3,
+  "train_folds": [
+    1,
+    2
+  ],
+  "split": "split_manifest.csv D007 image-level",
+  "train_source_sha256": "c02edab2aa742a52b8f083b199015765b00e1c253d5280ea3ad98f4a7e7708dc",
+  "split_manifest_sha256": "3c1b4d69463aa2ac3aab0302f1771104b6a47124c3ac997117bea6000bfaaefc",
+  "seed": 42,
+  "epochs": 50,
+  "batch": 32,
+  "lr": "1e-4 -> 1e-5@40",
+  "loss": "0.5*(bce+dice)_np + fg-masked-mse_hv + ce_tp",
+  "n_train": 4402,
+  "n_val": 777,
+  "best_epoch": 43,
+  "best_val_dice": 0.8554794185447503,
+  "cmd": "python train_hovernet_pannuke.py --test-fold 3",
+  "env": "d2i torch2.x cuda",
+  "elapsed_s": 6365,
+  "out": {
+    "best": "runs/hovernet_v3_fast_pannuke_testfold3/best_model.pth",
+    "last": "runs/hovernet_v3_fast_pannuke_testfold3/last_model.pth"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "run_id": "dist_scratch_crchisto",
+  "impl": "DRFNS PyTorch port distance regression, from scratch (fold-internal)",
+  "dataset": "crchisto",
+  "epochs": 300,
+  "best_val_mse": 0.4907,
+  "seed": 42,
+  "gt_note": "crchisto: disk r=8 synthesized instances (disclosed)",
+  "code_sha256": "d448affeb0aad756d2be3f0d6c194a8ddfd9ac94466b15b52327f2d215108588"
+}

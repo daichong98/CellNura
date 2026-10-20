@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "date": "2026-09-22",
+  "purpose": "DIST PyTorch core compatibility; not formal training",
+  "implementation": "DRFNS-derived PyTorch F16 VALID distance U-Net",
+  "task_trained_checkpoint": false,
+  "paper_main_table_eligible": false,
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4090",
+  "train_images": [
+    "fold3_image_950",
+    "fold2_image_2253"
+  ],
+  "outer_test_fold": "fold1",
+  "split_sha256": "3c1b4d69463aa2ac3aab0302f1771104b6a47124c3ac997117bea6000bfaaefc",
+  "initialization": "scratch; no task/pretrained weights",
+  "preprocessing": "raw RGB0..255; mean=None; reflected92px then center396; GT full-distance then center212",
+  "optimizer": "Adam lr1e-3; MSE only; debug settings, not original full training recipe",
+  "input_shape": [
+    2,
+    3,
+    396,
+    396
+  ],
+  "target_shape": [
+    2,
+    1,
+    212,
+    212
+  ],
+  "shape_572": [
+    1,
+    1,
+    388,
+    388
+  ],
+  "steps": 10,
+  "mse_history": [
+    0.9167554378509521,
+    0.5951368808746338,
+    0.4872633218765259,
+    0.42775383591651917,
+    0.39260992407798767,
+    0.36732396483421326,
+    0.3463568687438965,
+    0.32646507024765015,
+    0.3034440279006958,
+    0.27557218074798584
+  ],
+  "finite_gradients": true,
+  "parameter_update_verified": true,
+  "strict_reload_identical_gpu_predictions": true,
+  "target_exact_match_original": true,
+  "postprocess_exact_match_original_functions_cases": 16,
+  "postprocess_compatibility_fix": "explicit uint8 after clip/truncate; modern watershed import",
+  "tf_primitive_reference": {
+    "train": {
+      "max_abs_error": 1.1295080184936523e-05,
+      "rtol": 0.002,
+      "atol": 0.002
+    },
+    "eval": {
+      "max_abs_error": 8.392333984375e-05,
+      "rtol": 0.002,
+      "atol": 0.002
+    },
+    "bn_train": {
+      "max_abs_error": 4.76837158203125e-07,
+      "rtol": 0.002,
+      "atol": 0.002
+    },
+    "bn_eval": {
+      "max_abs_error": 9.5367431640625e-07,
+      "rtol": 0.002,
+      "atol": 0.002
+    },
+    "moving_mean": {
+      "max_abs_error": 5.122274160385132e-09,
+      "rtol": 0.002,
+      "atol": 0.002
+    },
+    "moving_var": {
+      "max_abs_error": 5.960464477539063e-08,
+      "rtol": 0.002,
+      "atol": 0.002
+    }
+  },
+  "reference_scope": "translated TF2 ops and shared parameters; not execution of entire author TF1 project",
+  "peak_gpu_allocated_MiB": 475.52978515625,
+  "training_loop_seconds": 1.2648565769195557,
+  "source_sha256": {
+    "source/src_RealData/Nets/UNetDistance.py": "1c9659f954ba55f18bc595aa018a676a02ebdb96f7ede25383b76d6975b0b5e4",
+    "source/src_RealData/Nets/UNetBatchNorm.py": "beaa3595f82f04b5c6ba0b7f94177dfe93e827dcdbd00abe665ef011b50c233a",
+    "source/src_RealData/Nets/UNetObject.py": "82dff6bf1ea1de1b1e4451bc97007f74846b761efdce260395db53da0ceb6d85",
+    "source/src_RealData/Nets/ObjectOriented.py": "7f289fdea8dba716ff564189f13714b3aa6117756eb41686e9c8ff52f7cefa33",
+    "source/src_RealData/preproc/BinToDistance.py": "6f6f3cfc158e94e8f51eb17a0a14899e6b4f5e9b1490f0b258db7a3c611dfa4d",
+    "source/src_RealData/postproc/postprocessing.py": "05af8fdb3380bfdfed912d9d5a6c42664b0332dd0822d65d1dfc1ae82a7c493c",
+    "source/src_RealData/Dist.py": "79a93793514bdc4952cfc9e139c06aec7401bec0de8a1a78e8c632511b7669a4"
+  },
+  "port_sha256": {
+    "targets_and_postprocess.py": "66230603e2587123b53b105a835c5adb6b8a0ccf6bf629e4fc2a4418083e460d",
+    "model.py": "2cc670b9414f2cbec41493b6a83bc8c2a209282428853bf4887a67d0f411ecce",
+    "check_training.py": "0ea2e09dba4ff4f5ce2bf079d96b2c9e42f89e2cd48016daaa437f5073570b9c",
+    "tf_reference.py": "05d781542a236e24689aa85427efdc39e04e43c3e488c6f26c089bae36ff5133"
+  },
+  "checkpoint_sha256": "c68f16ff163e21b7180e7f13b5387f1d6c42244cfe77db831a488d68daea6239",
+  "remaining": [
+    "formal train/validation/test trainer and selection",
+    "freeze train-fold preprocessing and optimizer schedule",
+    "full three-fold training",
+    "validation-selected postprocessing",
+    "typed classifier if multi-class comparison",
+    "complete predictions and unified evaluation"
+  ]
+}

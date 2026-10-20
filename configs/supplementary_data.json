@@ -1,0 +1,9 @@
+{
+  "code_release_id": "cellnura-v3.7",
+  "prediction_package": "Result",
+  "prediction_tasks": 46,
+  "task_class_rows": 214,
+  "registry": "Result/manifest.json",
+  "checksums": "Result/checksums.txt",
+  "status": "The 46-task predictions are included in Result/. This release has no separate artifact_manifest.json or release_manifest.json. Images, official annotations, and model weights are obtained separately and are not in this package."
+}

@@ -1,0 +1,13 @@
+{
+  "upstream_url": "https://github.com/PeterJackNaylor/DRFNS",
+  "upstream_commit": "73fc5683db5e9f860846e22c8c0daf73b7103082",
+  "commit_unknown": false,
+  "files": {
+    "targets_and_postprocess.py": "66230603e2587123b53b105a835c5adb6b8a0ccf6bf629e4fc2a4418083e460d",
+    "model.py": "2cc670b9414f2cbec41493b6a83bc8c2a209282428853bf4887a67d0f411ecce",
+    "LICENSE.upstream": "781cad467f8dc0f33e452277b346954fba72d70762b72c084fd4e8aa63140a32",
+    "tf_reference.py": "05d781542a236e24689aa85427efdc39e04e43c3e488c6f26c089bae36ff5133",
+    "preflight/TRAINING_PREFLIGHT.json": "be76017d359b910bd780d48cb5af11a2ec148078621ad13ee4660e6467c533b5"
+  },
+  "no_weights_or_datasets": true
+}

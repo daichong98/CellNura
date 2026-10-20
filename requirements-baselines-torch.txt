@@ -1,0 +1,13 @@
+# Locally observed d2i pair: torch2.9.1+cu126 / torchvision0.24.1+cu126.
+# Install the CUDA wheel pair explicitly; plain pins alone do not choose a CUDA build.
+torch==2.9.1
+torchvision==0.24.1
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+scikit-image==0.25.2
+opencv-python-headless==4.12.0.88
+scikit-learn==1.7.2
+Pillow==11.0.0
+matplotlib==3.10.8
+PyYAML==6.0.3

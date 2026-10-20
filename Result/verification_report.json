@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "method_comparison_tasks": 41,
+  "same_segmentation_tasks": 5,
+  "prediction_rows": 1794826,
+  "image_lists": 5,
+  "image_disjoint_role_partitions": 5,
+  "segmentation_checkpoint_identities": 5,
+  "per_class_rows": 214,
+  "gt_reconstructed_or_scored": false,
+  "note": "Prediction, class-count, image-role and fixed-detection integrity checked. Use bundled rebuild_ground_truth.py and replay_candidate.py for GT-based numerical reproduction."
+}

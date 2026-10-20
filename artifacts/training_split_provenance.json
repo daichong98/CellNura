@@ -1,0 +1,42 @@
+{
+  "operation": "Explicitly materialize existing internal image splits; not a new random partition",
+  "historical_split_sha256": "3c1b4d69463aa2ac3aab0302f1771104b6a47124c3ac997117bea6000bfaaefc",
+  "historical_split_note": "Byte hash of the split file used by the completed HoVer-Net runs. It is cited by baselines/hovernet/run_records and by source_original_split_manifest_sha256 in Result/segmentation_checkpoint_identities.csv. It is not the hash of either published CSV.",
+  "external_validation_definitions_sha256": "d8a1d5773e76acd7393708526bd0033938e769f13607a9f3ee6488b1f2a4f255",
+  "external_validation_definitions_path": "baselines/external_validation_splits.json",
+  "external_datasets": {
+    "CoNSeP": {
+      "train": 22,
+      "val": 5,
+      "test": 14,
+      "definition_source_sha256": "5cffd5dae5ac0b31c9fb1925efd799937bfb71a9304d409b16a970cad0ac508a",
+      "original_test_images_unchanged": true
+    },
+    "CRCHisto": {
+      "train": 68,
+      "val": 12,
+      "test": 20,
+      "definition_source_sha256": "d80e5c7111007125dd309b9873f986fc4b58f08d540bdcbdc070890a2ff1300c",
+      "original_test_images_unchanged": true
+    }
+  },
+  "published_files": {
+    "training_split_manifest": {
+      "paths": [
+        "artifacts/training_split_manifest.csv",
+        "Result/training_split_manifest.csv"
+      ],
+      "sha256": "1afcdb0c20c01434c6a0aff18ae7c7b0c058ab88cf3e541eafe2ac6a30a38c47",
+      "role": "Train/validation/test roles used by CellNura training. CoNSeP has 5 validation images and CRCHisto has 12; those images are train in the baseline split manifest."
+    },
+    "baseline_split_manifest": {
+      "path": "artifacts/split_manifest.csv",
+      "sha256": "38b39de78b4facdd2b6357a473017c817addd15714cddd7d38e5d2a0c166ce65",
+      "role": "Hash registered in baselines/catalog.json. Official train/test roles only; the 17 internal validation images stay labeled train and are defined in external_validation_splits.json."
+    }
+  },
+  "training_split_sha256": "1afcdb0c20c01434c6a0aff18ae7c7b0c058ab88cf3e541eafe2ac6a30a38c47",
+  "row_count": 23844,
+  "image_membership_unchanged": true,
+  "pannuke_roles_unchanged": true
+}

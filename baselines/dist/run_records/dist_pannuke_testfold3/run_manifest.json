@@ -1,0 +1,7 @@
+{
+  "run_id": "dist_pannuke_testfold3",
+  "impl": "DRFNS PyTorch port (02_DIST/pytorch_port)",
+  "note": "The author training augmentation and schedule were not ported. Adam 1e-4, MSE, batch 8, at most 20 epochs, patience 5, seed 42.",
+  "best_val_mse": 0.9938,
+  "seed": 42
+}

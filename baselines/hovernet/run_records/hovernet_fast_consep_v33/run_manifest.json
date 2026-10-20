@@ -1,0 +1,40 @@
+{
+  "run_id": "hovernet_fast_consep_v33",
+  "impl": "HoVer-Net fast nr_types=5, from scratch on CoNSeP 27 train",
+  "split": "image-level 22/5 (same as shared classifier, D007)",
+  "epochs": 60,
+  "batch": 16,
+  "seed": 42,
+  "best_val_dice": 0.8265,
+  "train_images": [
+    "train_10",
+    "train_11",
+    "train_12",
+    "train_13",
+    "train_14",
+    "train_15",
+    "train_16",
+    "train_19",
+    "train_2",
+    "train_20",
+    "train_22",
+    "train_23",
+    "train_24",
+    "train_25",
+    "train_26",
+    "train_27",
+    "train_3",
+    "train_5",
+    "train_6",
+    "train_7",
+    "train_8",
+    "train_9"
+  ],
+  "val_images": [
+    "train_1",
+    "train_17",
+    "train_18",
+    "train_21",
+    "train_4"
+  ]
+}

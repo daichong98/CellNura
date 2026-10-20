@@ -1,0 +1,10 @@
+{
+  "run_id": "dist_scratch_consep",
+  "impl": "DRFNS PyTorch port distance regression, from scratch (fold-internal)",
+  "dataset": "consep",
+  "epochs": 300,
+  "best_val_mse": 0.2617,
+  "seed": 42,
+  "gt_note": "consep: official inst masks",
+  "code_sha256": "d448affeb0aad756d2be3f0d6c194a8ddfd9ac94466b15b52327f2d215108588"
+}

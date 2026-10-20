@@ -1,0 +1,10 @@
+-r requirements-evaluation.txt
+scikit-learn==1.7.2
+scikit-image>=0.19.3,<0.26
+opencv-python-headless>=4.5.4,<4.10
+Pillow==10.4.0
+timm==1.0.22
+transformers==5.17.0
+safetensors>=0.4,<1
+# Install a mutually compatible torch/torchvision pair before this file.
+

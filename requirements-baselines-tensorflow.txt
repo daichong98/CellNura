@@ -1,0 +1,13 @@
+# Separate Python3.10 environment; TF2.15, not obsolete TF1.
+tensorflow==2.15.1
+keras==2.15.0
+numpy==1.26.4
+pandas==2.3.3
+scipy==1.15.3
+scikit-image==0.22.0
+opencv-python-headless==4.11.0.86
+imgaug==0.4.0
+efficientnet==1.1.1
+h5py==3.16.0
+protobuf==4.25.9
+Pillow>=9.5
